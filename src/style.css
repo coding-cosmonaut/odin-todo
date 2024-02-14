@@ -1,0 +1,62 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "Smooch Sans", sans-serif;
+  src: url("./assets/static/SmoochSans-Black.ttf"),
+    url("./assets/static/SmoochSans-ExtraBold.ttf"),
+    url("./assets/static/SmoochSans-Medium.ttf");
+}
+
+:root {
+  --font: "Smooch Sans", sans-serif;
+  --shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.69);
+  --main-black: #0f0f0f;
+  --second-black: #333333;
+}
+
+main {
+  height: 100dvh;
+  font-family: var(--font);
+}
+
+.todo-list-container {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-rows: 0.7fr 4fr 0.3fr;
+  height: 100%;
+}
+
+.header {
+  grid-column: 1/-1;
+  display: flex;
+  align-items: center;
+  box-shadow: var(--shadow);
+  -webkit-box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.69);
+  -moz-box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.69);
+}
+
+.header h1 {
+  font-size: 6rem;
+  font-weight: 500;
+}
+.header h1::before {
+  content: url("./assets/check.svg");
+  display: inline-block;
+  width: 90px;
+  transform: translateY(10px);
+  margin-right: 20px;
+}
+
+.sidebar {
+  background-color: var(--main-black);
+  color: white;
+}
+
+.footer {
+  grid-column: 1/3;
+  box-shadow: 0px -5px 5px 0px rgba(0, 0, 0, 0.75);
+}
