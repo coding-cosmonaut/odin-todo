@@ -26,12 +26,33 @@
                 </div>
                 <div class="input-container">
                   <label for="description"></label>
-                  <input
+                  <textarea
                     name="description"
                     id="description"
                     required
-                    type="text"
-                  />
+                    rows="5"
+                    cols="5"
+                  ></textarea>
+                </div>
+                <div class="input-container">
+                  <label for="due"></label>
+                  <input type="date" name="dueDate" id="due" required />
+                </div>
+                <div class="input-container">
+                  <label>
+                    <input type="radio" name="priority" value="low" />
+                    Low
+                  </label>
+
+                  <label>
+                    <input type="radio" name="priority" value="medium" />
+                    Medium
+                  </label>
+
+                  <label>
+                    <input type="radio" name="priority" value="high" />
+                    High
+                  </label>
                 </div>
                 <div class="buttons-container">
                   <button id="cancel" type="reset">Cancel</button>
