@@ -4,18 +4,22 @@ import { addEvent } from "./modules/event";
 import { toggleModal } from "./modules/modal";
 import { getFormData } from "./modules/form";
 import { createDiv } from "./modules/todoDOM";
+import { appendImage } from "./modules/appendAssets";
+import { globalElements } from "./global/elements";
 
 (function app() {
-  let taskBttn = document.querySelector("#task");
-  let submitBttn = document.querySelector('button[type="submit"]');
-  let form = document.querySelector("#new-task");
-  let contentDiv = document.querySelector(".todo-content");
-  addEvent(taskBttn, "click", toggleModal);
-  addEvent(form, "submit", (e) => {
+  let globalDOM = globalElements();
+  appendImage();
+  addEvent(globalDOM.taskBttn, "click", toggleModal);
+  addEvent(globalDOM.cancelBttn, "click", toggleModal);
+
+  addEvent(globalDOM.form, "submit", (e) => {
     e.preventDefault();
-    let formData = getFormData(form);
+    let formData = getFormData(globalDOM.form);
     let newTodo = appendTodo(formData);
 
-    contentDiv.append(createDiv(newTodo));
+    globalDOM.contentDiv.append(createDiv(newTodo));
+    globalDOM.form.reset();
+    toggleModal();
   });
 })();
