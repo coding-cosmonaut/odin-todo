@@ -12,7 +12,33 @@
           <h1>To-do List</h1>
         </div>
         <div class="sidebar"></div>
-        <div class="todo-content"></div>
+        <div class="todo-content">
+          <button id="task" class="creating-todo-bttn">Add Task</button>
+
+          <!--Modal Form-->
+          <dialog class="modal">
+            <div id="wrapper">
+              <form id="new-task" class="add-task" action="">
+                <h2>New Task</h2>
+                <div class="input-container">
+                  <label for="title"></label>
+                  <input
+                    name="title"
+                    id="title"
+                    required
+                    placeholder="Title"
+                    type="text"
+                  />
+                </div>
+                <div class="buttons-container">
+                  <button id="cancel" type="reset">Cancel</button>
+                  <button type="submit">Submit</button>
+                </div>
+              </form>
+            </div>
+          </dialog>
+          <!--Modal Form-->
+        </div>
         <div class="footer"></div>
       </div>
     </main>
