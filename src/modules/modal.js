@@ -1,5 +1,6 @@
+import { globalElements } from "../global/elements";
 export function toggleModal() {
-  let modal = document.querySelector(".modal");
+  let { modal } = globalElements();
   if (modal.open) {
     modal.close();
   } else {

@@ -63,6 +63,29 @@ main {
   box-shadow: 0px -5px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
+/*MODAL*/
+.modal {
+  position: absolute;
+  width: 50%;
+  height: auto;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 12px;
+  box-shadow: 0px 0px 15px 8px rgba(0, 0, 0, 0.75);
+}
+
+.modal::backdrop {
+  backdrop-filter: blur(4px);
+  background: #fff5;
+}
+
+#wrapper {
+  width: 100%;
+  height: 100%;
+}
+/*MODAL*/
+
 /*BUTTON*/
 .creating-todo-bttn {
   background-color: rgba(255, 255, 255, 0.1);

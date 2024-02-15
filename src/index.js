@@ -12,7 +12,10 @@ import { globalElements } from "./global/elements";
   appendImage();
   addEvent(globalDOM.taskBttn, "click", toggleModal);
   addEvent(globalDOM.cancelBttn, "click", toggleModal);
-
+  addEvent(globalDOM.modal, "click", toggleModal);
+  addEvent(globalDOM.wrapperForModal, "click", (e) => {
+    e.stopPropagation();
+  });
   addEvent(globalDOM.form, "submit", (e) => {
     e.preventDefault();
     let formData = getFormData(globalDOM.form);
