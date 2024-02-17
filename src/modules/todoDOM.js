@@ -23,9 +23,9 @@ function createDiv(obj) {
 
 function createProjectDiv(obj) {
   const div = document.createElement("div");
-  div.textContent = obj.title;
 
   const ul = document.createElement("ul");
+  ul.textContent = obj.title;
 
   div.append(ul);
 

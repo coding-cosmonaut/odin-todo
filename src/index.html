@@ -35,26 +35,33 @@
               <form class="form-project-wrap" action="">
                 <div class="input-container">
                   <label>
-                    <input type="text" name="title" />
+                    <input type="text" name="title" required />
                   </label>
                 </div>
-                <button class="add-project-bttn">Add Project</button>
+                <button class="add-project-bttn" type="submit">
+                  Submit
+                </button>
               </form>
 
               <form class="form-todo-wrap" action="">
                 <div class="input-container">
                   <label>
-                    <input type="text" name="title" />
+                    <input type="text" name="title" required />
                   </label>
                 </div>
                 <div class="input-container">
                   <label>
-                    <textarea name="description" rows="5" cols="15"></textarea>
+                    <textarea
+                      name="description"
+                      required
+                      rows="5"
+                      cols="15"
+                    ></textarea>
                   </label>
                 </div>
                 <div class="input-container">
                   <label>
-                    <input type="date" name="dueDate" />
+                    <input required type="date" name="dueDate" />
                   </label>
                 </div>
                 <div class="input-container">

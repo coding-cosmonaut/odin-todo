@@ -9,12 +9,12 @@ function createProject(formValue) {
 }
 
 function checkDuplicateProjectTitle(input) {
-  if (collectionOfProjects.length === 0) return true;
   return collectionOfProjects.every((item) => item.title !== input.value);
 }
 
-function switchToProject(div) {
+function switchToProject(div, project) {
   div.innerHTML = "";
+
   console.log(collectionOfProjects, "in create");
 }
 

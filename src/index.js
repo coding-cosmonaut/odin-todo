@@ -47,7 +47,7 @@ import { collectionOfProjects } from "./global/allProjects";
     form.reset();
     toggleModal();
   });
-  addEvent(addProjectBttn, "click", (e) => {
+  addEvent(projectForm, "submit", (e) => {
     e.preventDefault();
     if (
       checkDuplicateProjectTitle(
@@ -58,14 +58,15 @@ import { collectionOfProjects } from "./global/allProjects";
       let newProject = createProject(formData);
       collectionOfProjects.push(newProject);
       let newProjectDiv = createProjectDiv(newProject);
-      addEvent(newProjectDiv, "click", () => {
-        switchToProject(contentDiv);
+      addEvent(newProjectDiv, "click", function () {
+        let currentThis = this;
+        switchToProject(contentDiv, currentThis);
       });
 
       form.reset();
       projectForm.reset();
       toggleModal();
       projectContainer.append(newProjectDiv);
-    } else alert('Title already exists!');
+    } else alert("Title already exists!");
   });
 })();
