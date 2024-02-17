@@ -1,4 +1,5 @@
 import { globalElements } from "../global/elements";
+
 function toggleModal() {
   let { modal } = globalElements();
   if (modal.open) {
@@ -13,10 +14,14 @@ function switchModalForm(bttn, projectWrap, todoWrap) {
   if (id === "todo-form" && getComputedStyle(todoWrap).display === "none") {
     todoWrap.style.display = "flex";
     projectWrap.style.display = "none";
+    projectWrap.querySelector('input[type="text"]').removeAttribute("required");
   } else if (
     id === "project-form" &&
     getComputedStyle(projectWrap).display === "none"
   ) {
+    projectWrap
+      .querySelector('input[type="text"]')
+      .setAttribute("required", "");
     projectWrap.style.display = "flex";
     todoWrap.style.display = "none";
   }

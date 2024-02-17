@@ -83,13 +83,13 @@ main {
 #wrapper {
   width: 100%;
   height: 100%;
-}
-
-#new-task {
   display: grid;
   grid-template-columns: 0.5fr 1fr;
-  height: 100%;
 }
+
+/* #new-task {
+  grid-column: 2/3;
+} */
 
 .form-sidebar {
   grid-column: 1/2;
@@ -103,16 +103,14 @@ main {
   transform: translateX(50%);
 }
 
-.form-content {
-  grid-column: 2/3;
-}
-
 .form-todo-wrap {
+  grid-column: 2/3;
   display: flex;
   flex-direction: column;
 }
 
 .form-project-wrap {
+  grid-column: 2/3;
   display: none;
 }
 

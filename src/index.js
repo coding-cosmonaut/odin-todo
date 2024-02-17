@@ -3,9 +3,15 @@ import { createTodo } from "./modules/createTodo";
 import { addEvent } from "./modules/event";
 import { toggleModal, switchModalForm } from "./modules/modal";
 import { getFormData } from "./modules/form";
-import { createDiv } from "./modules/todoDOM";
+import { createDiv, createProjectDiv } from "./modules/todoDOM";
 import { appendImage } from "./modules/appendAssets";
 import { globalElements } from "./global/elements";
+import {
+  createProject,
+  switchToProject,
+  checkDuplicateProjectTitle,
+} from "./modules/createProject";
+import { collectionOfProjects } from "./global/allProjects";
 
 (function app() {
   const {
@@ -14,11 +20,14 @@ import { globalElements } from "./global/elements";
     modal,
     wrapperForModal,
     form,
+    projectForm,
     contentDiv,
     todoFormBttn,
     projectFormBttn,
     formProjectWrap,
     formTodoWrap,
+    addProjectBttn,
+    projectContainer,
   } = globalElements();
   appendImage();
   addEvent([taskBttn, cancelBttn, modal], "click", toggleModal);
@@ -37,5 +46,26 @@ import { globalElements } from "./global/elements";
     contentDiv.append(createDiv(newTodo));
     form.reset();
     toggleModal();
+  });
+  addEvent(addProjectBttn, "click", (e) => {
+    e.preventDefault();
+    if (
+      checkDuplicateProjectTitle(
+        formProjectWrap.querySelector('input[type="text"]')
+      )
+    ) {
+      let formData = getFormData(projectForm);
+      let newProject = createProject(formData);
+      collectionOfProjects.push(newProject);
+      let newProjectDiv = createProjectDiv(newProject);
+      addEvent(newProjectDiv, "click", () => {
+        switchToProject(contentDiv);
+      });
+
+      form.reset();
+      projectForm.reset();
+      toggleModal();
+      projectContainer.append(newProjectDiv);
+    } else alert('Title already exists!');
   });
 })();

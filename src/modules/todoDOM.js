@@ -1,6 +1,7 @@
 import { format } from "date-fns";
+import { addEvent } from "./event";
 
-export function createDiv(obj) {
+function createDiv(obj) {
   const div = document.createElement("div");
 
   const heading = document.createElement("p");
@@ -19,3 +20,16 @@ export function createDiv(obj) {
   div.append(heading, descp, dateDiv, priorityP);
   return div;
 }
+
+function createProjectDiv(obj) {
+  const div = document.createElement("div");
+  div.textContent = obj.title;
+
+  const ul = document.createElement("ul");
+
+  div.append(ul);
+
+  return div;
+}
+
+export { createDiv, createProjectDiv };
