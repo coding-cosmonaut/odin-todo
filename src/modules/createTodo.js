@@ -7,7 +7,8 @@ export function createTodo(formValue) {
     data.title,
     data.description,
     data.dueDate,
-    data.priority
+    data.priority,
+    data.project
   );
   return newTodo;
 }

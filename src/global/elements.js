@@ -13,6 +13,7 @@ export function globalElements() {
   const formTodoWrap = document.querySelector(".form-todo-wrap");
   const addProjectBttn = document.querySelector(".add-project-bttn");
   const projectContainer = document.querySelector(".project-container");
+  const dropdownProjectInput = document.querySelector("#project-dropdown");
   //const modalFormContent = document.querySelector(".form-content");
 
   return {
@@ -30,5 +31,6 @@ export function globalElements() {
     formTodoWrap,
     addProjectBttn,
     projectContainer,
+    dropdownProjectInput,
   };
 }

@@ -10,8 +10,10 @@ import {
   createProject,
   switchToProject,
   checkDuplicateProjectTitle,
+  checkForProjects,
 } from "./modules/createProject";
 import { collectionOfProjects } from "./global/allProjects";
+import { add } from "date-fns";
 
 (function app() {
   const {
@@ -28,6 +30,7 @@ import { collectionOfProjects } from "./global/allProjects";
     formTodoWrap,
     addProjectBttn,
     projectContainer,
+    dropdownProjectInput,
   } = globalElements();
   appendImage();
   addEvent([taskBttn, cancelBttn, modal], "click", toggleModal);
@@ -38,6 +41,9 @@ import { collectionOfProjects } from "./global/allProjects";
   addEvent(wrapperForModal, "click", (e) => {
     e.stopPropagation();
   });
+  addEvent(taskBttn, "click", (() => {
+    checkForProjects(dropdownProjectInput)
+  }));
   addEvent(form, "submit", (e) => {
     e.preventDefault();
     let formData = getFormData(form);

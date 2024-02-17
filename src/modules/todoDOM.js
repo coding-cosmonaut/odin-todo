@@ -17,7 +17,10 @@ function createDiv(obj) {
   const priorityP = document.createElement("p");
   priorityP.textContent = obj.priority;
 
-  div.append(heading, descp, dateDiv, priorityP);
+  const projectP = document.createElement("p");
+  projectP.textContent = obj.project;
+
+  div.append(heading, descp, dateDiv, priorityP, projectP);
   return div;
 }
 

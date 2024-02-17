@@ -18,8 +18,8 @@
               Home
               <ul class="home-ul"></ul>
             </div>
-            <div class="project-container">Projects</div>
           </div>
+          <div class="project-container">Projects</div>
           <button id="task" class="creating-todo-bttn"></button>
         </div>
 
@@ -38,9 +38,7 @@
                     <input type="text" name="title" required />
                   </label>
                 </div>
-                <button class="add-project-bttn" type="submit">
-                  Submit
-                </button>
+                <button class="add-project-bttn" type="submit">Submit</button>
               </form>
 
               <form class="form-todo-wrap" action="">
@@ -80,6 +78,16 @@
                     High
                   </label>
                 </div>
+
+                <div class="input-container">
+                  <label>
+                    Projects
+                    <select name="project" id="project-dropdown">
+                      <option value="homePage" selected>Home</option>
+                    </select>
+                  </label>
+                </div>
+
                 <div class="buttons-container">
                   <button id="cancel" type="reset">Cancel</button>
                   <button type="submit">Submit</button>
