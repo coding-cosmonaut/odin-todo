@@ -19,44 +19,60 @@
           <dialog class="modal">
             <div id="wrapper">
               <form id="new-task" class="add-task" action="">
-                <h2>New Task</h2>
-                <div class="input-container">
-                  <label for="title"></label>
-                  <input name="title" id="title" required type="text" />
+                <div class="form-sidebar">
+                  <button type="button" id="todo-form">To-do</button>
+                  <button type="button" id="project-form">Project</button>
                 </div>
-                <div class="input-container">
-                  <label for="description"></label>
-                  <textarea
-                    name="description"
-                    id="description"
-                    required
-                    rows="5"
-                    cols="5"
-                  ></textarea>
-                </div>
-                <div class="input-container">
-                  <label for="due"></label>
-                  <input type="date" name="dueDate" id="due" required />
-                </div>
-                <div class="input-container">
-                  <label>
-                    <input type="radio" name="priority" value="low" />
-                    Low
-                  </label>
+                <div class="form-content">
+                  <div class="form-project-wrap">
+                    <div class="input-container">
+                      <label>
+                        <input type="text" name="title" required />
+                      </label>
+                    </div>
+                  </div>
+                  <div class="form-todo-wrap">
+                    <div class="input-container">
+                      <label>
+                        <input type="text" name="title" required />
+                      </label>
+                    </div>
+                    <div class="input-container">
+                      <label>
+                        <textarea
+                          name="description"
+                          required
+                          rows="5"
+                          cols="15"
+                        ></textarea>
+                      </label>
+                    </div>
+                    <div class="input-container">
+                      <label>
+                        <input type="date" name="dueDate" required />
+                      </label>
+                    </div>
+                    <div class="input-container">
+                      <label>
+                        <input type="radio" name="priority" value="low" />
+                        Low
+                      </label>
 
-                  <label>
-                    <input type="radio" name="priority" value="medium" />
-                    Medium
-                  </label>
+                      <label>
+                        <input type="radio" name="priority" value="medium" />
+                        Medium
+                      </label>
 
-                  <label>
-                    <input type="radio" name="priority" value="high" />
-                    High
-                  </label>
-                </div>
-                <div class="buttons-container">
-                  <button id="cancel" type="reset">Cancel</button>
-                  <button type="submit">Submit</button>
+                      <label>
+                        <input type="radio" name="priority" value="high" />
+                        High
+                      </label>
+                    </div>
+                    <div class="buttons-container">
+                      <button id="cancel" type="reset">Cancel</button>
+                      <button type="submit">Submit</button>
+                    </div>
+                  </div>
                 </div>
               </form>
             </div>

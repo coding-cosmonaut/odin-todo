@@ -1,11 +1,16 @@
 export function globalElements() {
-  let taskBttn = document.querySelector("#task");
-  let submitBttn = document.querySelector('button[type="submit"]');
-  let cancelBttn = document.querySelector("#cancel");
-  let form = document.querySelector("#new-task");
-  let contentDiv = document.querySelector(".todo-content");
-  let wrapperForModal = document.querySelector("#wrapper");
-  let modal = document.querySelector(".modal");
+  const taskBttn = document.querySelector("#task");
+  const submitBttn = document.querySelector('button[type="submit"]');
+  const cancelBttn = document.querySelector("#cancel");
+  const form = document.querySelector("#new-task");
+  const contentDiv = document.querySelector(".todo-content");
+  const wrapperForModal = document.querySelector("#wrapper");
+  const modal = document.querySelector(".modal");
+  const todoFormBttn = document.querySelector("#todo-form");
+  const projectFormBttn = document.querySelector("#project-form");
+  const formProjectWrap = document.querySelector(".form-project-wrap");
+  const formTodoWrap = document.querySelector(".form-todo-wrap");
+  //const modalFormContent = document.querySelector(".form-content");
 
   return {
     taskBttn,
@@ -15,5 +20,9 @@ export function globalElements() {
     contentDiv,
     wrapperForModal,
     modal,
+    todoFormBttn,
+    projectFormBttn,
+    formProjectWrap,
+    formTodoWrap,
   };
 }

@@ -85,8 +85,39 @@ main {
   height: 100%;
 }
 
+#new-task {
+  display: grid;
+  grid-template-columns: 0.5fr 1fr;
+  height: 100%;
+}
+
+.form-sidebar {
+  grid-column: 1/2;
+  background-color: whitesmoke;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-sidebar button {
+  width: 50%;
+  transform: translateX(50%);
+}
+
+.form-content {
+  grid-column: 2/3;
+}
+
+.form-todo-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-project-wrap {
+  display: none;
+}
+
 textarea {
-    resize: none;
+  resize: none;
 }
 /*MODAL*/
 
