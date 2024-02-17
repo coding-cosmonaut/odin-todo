@@ -10,10 +10,9 @@ import {
   createProject,
   switchToProject,
   checkDuplicateProjectTitle,
-  checkForProjects,
+  appendProjectToDropdown,
 } from "./modules/createProject";
 import { collectionOfProjects } from "./global/allProjects";
-import { add } from "date-fns";
 
 (function app() {
   const {
@@ -41,9 +40,6 @@ import { add } from "date-fns";
   addEvent(wrapperForModal, "click", (e) => {
     e.stopPropagation();
   });
-  addEvent(taskBttn, "click", (() => {
-    checkForProjects(dropdownProjectInput)
-  }));
   addEvent(form, "submit", (e) => {
     e.preventDefault();
     let formData = getFormData(form);
@@ -63,6 +59,7 @@ import { add } from "date-fns";
       let formData = getFormData(projectForm);
       let newProject = createProject(formData);
       collectionOfProjects.push(newProject);
+      appendProjectToDropdown(dropdownProjectInput, newProject);
       let newProjectDiv = createProjectDiv(newProject);
       addEvent(newProjectDiv, "click", function () {
         let currentThis = this;

@@ -12,14 +12,11 @@ function checkDuplicateProjectTitle(input) {
   return collectionOfProjects.every((item) => item.title !== input.value);
 }
 
-function checkForProjects(input) {
-  console.log(input);
-  collectionOfProjects.forEach((project) => {
-    const option = document.createElement("option");
-    option.setAttribute("value", project.title);
-    option.textContent = project.title;
-    input.appendChild(option);
-  });
+function appendProjectToDropdown(input, obj) {
+  const option = document.createElement("option");
+  option.setAttribute("value", obj.title);
+  option.textContent = obj.title;
+  input.appendChild(option);
 }
 
 function switchToProject(div, project) {
@@ -32,5 +29,5 @@ export {
   createProject,
   switchToProject,
   checkDuplicateProjectTitle,
-  checkForProjects,
+  appendProjectToDropdown,
 };
