@@ -21,18 +21,15 @@ import { globalElements } from "./global/elements";
     formTodoWrap,
   } = globalElements();
   appendImage();
-  addEvent(taskBttn, "click", toggleModal);
+  addEvent([taskBttn, cancelBttn, modal], "click", toggleModal);
   addEvent([todoFormBttn, projectFormBttn], "click", function () {
     const currentThis = this;
     switchModalForm(currentThis, formProjectWrap, formTodoWrap);
   });
-  addEvent(cancelBttn, "click", toggleModal);
-  addEvent(modal, "click", toggleModal);
   addEvent(wrapperForModal, "click", (e) => {
     e.stopPropagation();
   });
   addEvent(form, "submit", (e) => {
-    console.log("run");
     e.preventDefault();
     let formData = getFormData(form);
     let newTodo = createTodo(formData);
