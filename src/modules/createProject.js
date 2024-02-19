@@ -1,5 +1,6 @@
 import Project from "./projects";
-import { collectionOfProjects } from "../global/allProjects";
+import { collectionOfProjects, collectionOfTodos } from "../global/allProjects";
+import { queryProject, createTodoDiv } from "./todoDOM";
 
 function createProject(formValue) {
   let data = Object.fromEntries(formValue);
@@ -20,9 +21,44 @@ function appendProjectToDropdown(input, obj) {
 }
 
 function switchToProject(div, project) {
+  console.log(div, "div");
+  console.log(project, "project");
   div.innerHTML = "";
+  if (project === "Home") {
+    collectionOfTodos.forEach((item) => {
+      let todo = createTodoDiv(item);
+      div.append(todo);
+    });
+  } else {
+    collectionOfProjects.forEach((item) => {
+      if (item.title === project) {
+        console.log(item, "in ELSE");
+        item.todos.forEach((todo) => {
+          let newTodo = createTodoDiv(todo);
+          div.append(newTodo);
+        });
+      }
+    });
+  }
+}
 
-  console.log(collectionOfProjects, "in create");
+function appendTodosToGlobalArray(todo) {
+  collectionOfTodos.push(todo);
+}
+
+function appendTodoToProject(project, todo) {
+  if (project === "Home") {
+    appendTodosToGlobalArray(todo);
+    console.log(collectionOfTodos);
+  } else {
+    const selectedProject = collectionOfProjects.find(
+      (item) => item.title === project
+    );
+    selectedProject.todos.push(todo);
+    console.log(selectedProject, "selected in appendtoto");
+  }
+  // let target = queryProject(selectedProject.title);
+  // return target;
 }
 
 export {
@@ -30,4 +66,5 @@ export {
   switchToProject,
   checkDuplicateProjectTitle,
   appendProjectToDropdown,
+  appendTodoToProject,
 };

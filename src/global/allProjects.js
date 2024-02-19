@@ -1,1 +1,4 @@
-export const collectionOfProjects = [];
+const collectionOfProjects = [];
+const collectionOfTodos = [];
+
+export { collectionOfProjects, collectionOfTodos };

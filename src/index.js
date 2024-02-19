@@ -3,7 +3,7 @@ import { createTodo } from "./modules/createTodo";
 import { addEvent } from "./modules/event";
 import { toggleModal, switchModalForm } from "./modules/modal";
 import { getFormData } from "./modules/form";
-import { createDiv, createProjectDiv } from "./modules/todoDOM";
+import { createTodoDiv, createProjectDiv } from "./modules/todoDOM";
 import { appendImage } from "./modules/appendAssets";
 import { globalElements } from "./global/elements";
 import {
@@ -11,6 +11,7 @@ import {
   switchToProject,
   checkDuplicateProjectTitle,
   appendProjectToDropdown,
+  appendTodoToProject,
 } from "./modules/createProject";
 import { collectionOfProjects } from "./global/allProjects";
 
@@ -30,9 +31,13 @@ import { collectionOfProjects } from "./global/allProjects";
     addProjectBttn,
     projectContainer,
     dropdownProjectInput,
+    homePage,
   } = globalElements();
   appendImage();
   addEvent([taskBttn, cancelBttn, modal], "click", toggleModal);
+  addEvent(homePage, "click", () => {
+    switchToProject(contentDiv, "Home");
+  });
   addEvent([todoFormBttn, projectFormBttn], "click", function () {
     const currentThis = this;
     switchModalForm(currentThis, formProjectWrap, formTodoWrap);
@@ -42,10 +47,21 @@ import { collectionOfProjects } from "./global/allProjects";
   });
   addEvent(form, "submit", (e) => {
     e.preventDefault();
-    let formData = getFormData(form);
-    let newTodo = createTodo(formData);
+    const formData = getFormData(form);
+    const newTodo = createTodo(formData);
 
-    contentDiv.append(createDiv(newTodo));
+    const { project } = newTodo;
+
+    //find project in collection - push todo into array
+    appendTodoToProject(project, newTodo);
+
+    //const newTodoDiv = createTodoDiv(newTodo);
+
+    switchToProject(contentDiv, project);
+
+    //console.log(newTodoDiv);
+
+    //contentDiv.append(newTodoDiv);
     form.reset();
     toggleModal();
   });
@@ -62,7 +78,7 @@ import { collectionOfProjects } from "./global/allProjects";
       appendProjectToDropdown(dropdownProjectInput, newProject);
       let newProjectDiv = createProjectDiv(newProject);
       addEvent(newProjectDiv, "click", function () {
-        let currentThis = this;
+        let currentThis = this.firstChild.getAttribute("data-title");
         switchToProject(contentDiv, currentThis);
       });
 

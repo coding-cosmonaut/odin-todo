@@ -14,6 +14,7 @@ export function globalElements() {
   const addProjectBttn = document.querySelector(".add-project-bttn");
   const projectContainer = document.querySelector(".project-container");
   const dropdownProjectInput = document.querySelector("#project-dropdown");
+  const homePage = document.querySelector(".home");
   //const modalFormContent = document.querySelector(".form-content");
 
   return {
@@ -32,5 +33,6 @@ export function globalElements() {
     addProjectBttn,
     projectContainer,
     dropdownProjectInput,
+    homePage,
   };
 }

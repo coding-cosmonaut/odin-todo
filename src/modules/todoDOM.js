@@ -1,7 +1,6 @@
 import { format } from "date-fns";
-import { addEvent } from "./event";
 
-function createDiv(obj) {
+function createTodoDiv(obj) {
   const div = document.createElement("div");
 
   const heading = document.createElement("p");
@@ -17,10 +16,10 @@ function createDiv(obj) {
   const priorityP = document.createElement("p");
   priorityP.textContent = obj.priority;
 
-  const projectP = document.createElement("p");
-  projectP.textContent = obj.project;
+  // const projectP = document.createElement("p");
+  // projectP.textContent = obj.project;
 
-  div.append(heading, descp, dateDiv, priorityP, projectP);
+  div.append(heading, descp, dateDiv, priorityP);
   return div;
 }
 
@@ -29,10 +28,17 @@ function createProjectDiv(obj) {
 
   const ul = document.createElement("ul");
   ul.textContent = obj.title;
+  ul.setAttribute("data-title", obj.title);
 
   div.append(ul);
 
   return div;
 }
 
-export { createDiv, createProjectDiv };
+function queryProject(projectTitle) {
+  return document.querySelector(`[data-title="${projectTitle}"]`);
+}
+
+//function checkProjectProp(project) {}
+
+export { createTodoDiv, createProjectDiv, queryProject };
