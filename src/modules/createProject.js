@@ -1,6 +1,6 @@
 import Project from "./projects";
 import { collectionOfProjects, collectionOfTodos } from "../global/allProjects";
-import { queryProject, createTodoDiv } from "./todoDOM";
+import { createTodoDiv } from "./todoDOM";
 
 function createProject(formValue) {
   let data = Object.fromEntries(formValue);
@@ -57,8 +57,6 @@ function appendTodoToProject(project, todo) {
     selectedProject.todos.push(todo);
     console.log(selectedProject, "selected in appendtoto");
   }
-  // let target = queryProject(selectedProject.title);
-  // return target;
 }
 
 export {

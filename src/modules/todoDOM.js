@@ -16,9 +16,6 @@ function createTodoDiv(obj) {
   const priorityP = document.createElement("p");
   priorityP.textContent = obj.priority;
 
-  // const projectP = document.createElement("p");
-  // projectP.textContent = obj.project;
-
   div.append(heading, descp, dateDiv, priorityP);
   return div;
 }
@@ -35,10 +32,4 @@ function createProjectDiv(obj) {
   return div;
 }
 
-function queryProject(projectTitle) {
-  return document.querySelector(`[data-title="${projectTitle}"]`);
-}
-
-//function checkProjectProp(project) {}
-
-export { createTodoDiv, createProjectDiv, queryProject };
+export { createTodoDiv, createProjectDiv };
