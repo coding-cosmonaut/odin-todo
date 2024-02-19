@@ -16,6 +16,7 @@ export function globalElements() {
   const dropdownProjectInput = document.querySelector("#project-dropdown");
   const homePage = document.querySelector(".home");
   const todayPage = document.querySelector(".today-container");
+  const thisWeekPage = document.querySelector(".this-week-container");
 
   return {
     taskBttn,
@@ -35,5 +36,6 @@ export function globalElements() {
     dropdownProjectInput,
     homePage,
     todayPage,
+    thisWeekPage,
   };
 }

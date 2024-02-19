@@ -2,10 +2,11 @@ import Project from "./projects";
 import {
   collectionOfProjects,
   collectionOfTodos,
+  thisWeekTodoCollection,
   todayTodoCollection,
 } from "../global/allProjects";
 import { createTodoDiv } from "./todoDOM";
-import { isToday } from "date-fns";
+import { isToday, isThisWeek } from "date-fns";
 
 function createProject(formValue) {
   let data = Object.fromEntries(formValue);
@@ -52,7 +53,19 @@ function appendTodayPage(div) {
       div.append(todayTodo);
     });
   } else {
-    div.innerHTML = 'Nothing do, today!'
+    div.innerHTML = "Nothing do, today!";
+  }
+}
+
+function appendThisWeekPage(div) {
+  if (thisWeekTodoCollection.length !== 0) {
+    div.innerHTML = "";
+    thisWeekTodoCollection.forEach((todo) => {
+      let todayTodo = createTodoDiv(todo);
+      div.append(todayTodo);
+    });
+  } else {
+    div.innerHTML = "Nothing do, this week!";
   }
 }
 
@@ -60,7 +73,7 @@ function appendTodosToGlobalArray(todo) {
   collectionOfTodos.push(todo);
 }
 
-function appendTodoToProject(project, todo, dateSelected, todaySection) {
+function appendTodoToProject(project, todo, dateSelected) {
   const replaced = dateSelected.replace(/-/g, "/");
   if (project !== "Home") {
     const selectedProject = collectionOfProjects.find(
@@ -70,6 +83,9 @@ function appendTodoToProject(project, todo, dateSelected, todaySection) {
   }
   if (isToday(replaced)) {
     todayTodoCollection.push(todo);
+  }
+  if (isThisWeek(replaced)) {
+    thisWeekTodoCollection.push(todo);
   }
   appendTodosToGlobalArray(todo);
 }
@@ -81,4 +97,5 @@ export {
   appendProjectToDropdown,
   appendTodoToProject,
   appendTodayPage,
+  appendThisWeekPage,
 };

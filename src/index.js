@@ -13,6 +13,7 @@ import {
   appendProjectToDropdown,
   appendTodoToProject,
   appendTodayPage,
+  appendThisWeekPage,
 } from "./modules/createProject";
 import { collectionOfProjects } from "./global/allProjects";
 
@@ -34,12 +35,16 @@ import { collectionOfProjects } from "./global/allProjects";
     dropdownProjectInput,
     homePage,
     todayPage,
+    thisWeekPage,
   } = globalElements();
 
   appendImage();
   addEvent([taskBttn, cancelBttn, modal], "click", toggleModal);
   addEvent(todayPage, "click", () => {
     appendTodayPage(contentDiv);
+  });
+  addEvent(thisWeekPage, "click", () => {
+    appendThisWeekPage(contentDiv);
   });
   addEvent(homePage, "click", () => {
     switchToProject(contentDiv, "Home");
@@ -58,10 +63,10 @@ import { collectionOfProjects } from "./global/allProjects";
 
     const { project, dueDate } = newTodo;
 
-    //find project in collection - push todo into array
-    appendTodoToProject(project, newTodo, dueDate, todayPage);
+    appendTodoToProject(project, newTodo, dueDate);
 
     appendTodayPage(contentDiv);
+    appendThisWeekPage(contentDiv);
 
     switchToProject(contentDiv, project);
 
