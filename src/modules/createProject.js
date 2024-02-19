@@ -21,8 +21,6 @@ function appendProjectToDropdown(input, obj) {
 }
 
 function switchToProject(div, project) {
-  console.log(div, "div");
-  console.log(project, "project");
   div.innerHTML = "";
   if (project === "Home") {
     collectionOfTodos.forEach((item) => {
@@ -32,7 +30,6 @@ function switchToProject(div, project) {
   } else {
     collectionOfProjects.forEach((item) => {
       if (item.title === project) {
-        console.log(item, "in ELSE");
         item.todos.forEach((todo) => {
           let newTodo = createTodoDiv(todo);
           div.append(newTodo);
@@ -47,16 +44,13 @@ function appendTodosToGlobalArray(todo) {
 }
 
 function appendTodoToProject(project, todo) {
-  if (project === "Home") {
-    appendTodosToGlobalArray(todo);
-    console.log(collectionOfTodos);
-  } else {
+  if (project !== "Home") {
     const selectedProject = collectionOfProjects.find(
       (item) => item.title === project
     );
     selectedProject.todos.push(todo);
-    console.log(selectedProject, "selected in appendtoto");
   }
+  appendTodosToGlobalArray(todo);
 }
 
 export {

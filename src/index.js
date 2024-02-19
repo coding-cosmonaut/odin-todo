@@ -59,7 +59,6 @@ import { collectionOfProjects } from "./global/allProjects";
 
     switchToProject(contentDiv, project);
 
-    //console.log(newTodoDiv);
 
     //contentDiv.append(newTodoDiv);
     form.reset();
