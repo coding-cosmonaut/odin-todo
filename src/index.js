@@ -12,6 +12,7 @@ import {
   checkDuplicateProjectTitle,
   appendProjectToDropdown,
   appendTodoToProject,
+  appendTodayPage,
 } from "./modules/createProject";
 import { collectionOfProjects } from "./global/allProjects";
 
@@ -32,9 +33,14 @@ import { collectionOfProjects } from "./global/allProjects";
     projectContainer,
     dropdownProjectInput,
     homePage,
+    todayPage,
   } = globalElements();
+
   appendImage();
   addEvent([taskBttn, cancelBttn, modal], "click", toggleModal);
+  addEvent(todayPage, "click", () => {
+    appendTodayPage(contentDiv);
+  });
   addEvent(homePage, "click", () => {
     switchToProject(contentDiv, "Home");
   });
@@ -50,17 +56,15 @@ import { collectionOfProjects } from "./global/allProjects";
     const formData = getFormData(form);
     const newTodo = createTodo(formData);
 
-    const { project } = newTodo;
+    const { project, dueDate } = newTodo;
 
     //find project in collection - push todo into array
-    appendTodoToProject(project, newTodo);
+    appendTodoToProject(project, newTodo, dueDate, todayPage);
 
-    //const newTodoDiv = createTodoDiv(newTodo);
+    appendTodayPage(contentDiv);
 
     switchToProject(contentDiv, project);
 
-
-    //contentDiv.append(newTodoDiv);
     form.reset();
     toggleModal();
   });

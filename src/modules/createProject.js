@@ -1,6 +1,11 @@
 import Project from "./projects";
-import { collectionOfProjects, collectionOfTodos } from "../global/allProjects";
+import {
+  collectionOfProjects,
+  collectionOfTodos,
+  todayTodoCollection,
+} from "../global/allProjects";
 import { createTodoDiv } from "./todoDOM";
+import { isToday } from "date-fns";
 
 function createProject(formValue) {
   let data = Object.fromEntries(formValue);
@@ -39,16 +44,32 @@ function switchToProject(div, project) {
   }
 }
 
+function appendTodayPage(div) {
+  if (todayTodoCollection.length !== 0) {
+    div.innerHTML = "";
+    todayTodoCollection.forEach((todo) => {
+      let todayTodo = createTodoDiv(todo);
+      div.append(todayTodo);
+    });
+  } else {
+    div.innerHTML = 'Nothing do, today!'
+  }
+}
+
 function appendTodosToGlobalArray(todo) {
   collectionOfTodos.push(todo);
 }
 
-function appendTodoToProject(project, todo) {
+function appendTodoToProject(project, todo, dateSelected, todaySection) {
+  const replaced = dateSelected.replace(/-/g, "/");
   if (project !== "Home") {
     const selectedProject = collectionOfProjects.find(
       (item) => item.title === project
     );
     selectedProject.todos.push(todo);
+  }
+  if (isToday(replaced)) {
+    todayTodoCollection.push(todo);
   }
   appendTodosToGlobalArray(todo);
 }
@@ -59,4 +80,5 @@ export {
   checkDuplicateProjectTitle,
   appendProjectToDropdown,
   appendTodoToProject,
+  appendTodayPage,
 };
