@@ -18,6 +18,8 @@ export function globalElements() {
   const todayPage = document.querySelector(".today-container");
   const thisWeekPage = document.querySelector(".this-week-container");
 
+  //const editTodoModal = document.querySelector(".edit-modal");
+
   return {
     taskBttn,
     submitBttn,

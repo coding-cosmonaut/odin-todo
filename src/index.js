@@ -1,5 +1,5 @@
 import "./style.css";
-import { createTodo } from "./modules/createTodo";
+import { createTodo, checkDuplicateTodoTitle } from "./modules/createTodo";
 import { addEvent } from "./modules/event";
 import { toggleModal, switchModalForm } from "./modules/modal";
 import { getFormData } from "./modules/form";
@@ -39,7 +39,9 @@ import { collectionOfProjects } from "./global/allProjects";
   } = globalElements();
 
   appendImage();
-  addEvent([taskBttn, cancelBttn, modal], "click", toggleModal);
+  addEvent([taskBttn, cancelBttn, modal], "click", () => {
+    toggleModal(modal);
+  });
   addEvent(todayPage, "click", () => {
     appendTodayPage(contentDiv);
   });
@@ -58,20 +60,24 @@ import { collectionOfProjects } from "./global/allProjects";
   });
   addEvent(form, "submit", (e) => {
     e.preventDefault();
-    const formData = getFormData(form);
-    const newTodo = createTodo(formData);
+    if (
+      checkDuplicateTodoTitle(formTodoWrap.querySelector('input[type="text"]'))
+    ) {
+      const formData = getFormData(form);
+      const newTodo = createTodo(formData);
 
-    const { project, dueDate } = newTodo;
+      const { project, dueDate } = newTodo;
 
-    appendTodoToProject(project, newTodo, dueDate);
+      appendTodoToProject(project, newTodo, dueDate);
 
-    appendTodayPage(contentDiv);
-    appendThisWeekPage(contentDiv);
+      appendTodayPage(contentDiv);
+      appendThisWeekPage(contentDiv);
 
-    switchToProject(contentDiv, project);
+      switchToProject(contentDiv, project);
 
-    form.reset();
-    toggleModal();
+      form.reset();
+      toggleModal(modal);
+    } else alert("To-do title already exists!");
   });
   addEvent(projectForm, "submit", (e) => {
     e.preventDefault();
@@ -92,7 +98,7 @@ import { collectionOfProjects } from "./global/allProjects";
 
       form.reset();
       projectForm.reset();
-      toggleModal();
+      toggleModal(modal);
       projectContainer.append(newProjectDiv);
     } else alert("Title already exists!");
   });

@@ -1,7 +1,4 @@
-import { globalElements } from "../global/elements";
-
-function toggleModal() {
-  let { modal } = globalElements();
+function toggleModal(modal) {
   if (modal.open) {
     modal.close();
   } else {

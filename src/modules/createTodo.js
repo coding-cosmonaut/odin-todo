@@ -1,6 +1,7 @@
+import { collectionOfTodos } from "../global/allProjects";
 import Todo from "./todo";
 
-export function createTodo(formValue) {
+function createTodo(formValue) {
   let data = Object.fromEntries(formValue);
 
   let newTodo = new Todo(
@@ -12,3 +13,9 @@ export function createTodo(formValue) {
   );
   return newTodo;
 }
+
+function checkDuplicateTodoTitle(input) {
+  return collectionOfTodos.every((item) => item.title !== input.value);
+}
+
+export { checkDuplicateTodoTitle, createTodo };

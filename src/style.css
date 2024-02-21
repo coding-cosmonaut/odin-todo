@@ -87,10 +87,6 @@ main {
   grid-template-columns: 0.5fr 1fr;
 }
 
-/* #new-task {
-  grid-column: 2/3;
-} */
-
 .form-sidebar {
   grid-column: 1/2;
   background-color: whitesmoke;
@@ -138,4 +134,20 @@ textarea {
 }
 .plus-icon:hover {
   transform: rotate(360deg);
+}
+
+/*TODO*/
+.edit-bttn-todo {
+  width: 20px;
+  height: auto;
+}
+.todo-content {
+}
+
+.single-todo {
+  display: flex;
+  justify-content: space-between;
+  border: 2px solid black;
+  margin: 20px;
+  width: 60%;
 }
