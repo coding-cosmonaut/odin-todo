@@ -1,5 +1,6 @@
 import { format, isToday, isThisWeek } from "date-fns";
 import EditIcon from "/src/assets/pencil.svg";
+import DetailIcon from "/src/assets/exclamation.svg";
 import { addEvent } from "./event";
 import {
   collectionOfTodos,
@@ -20,14 +21,14 @@ function createTodoDiv(obj) {
   const heading = document.createElement("p");
   heading.textContent = obj.title;
 
-  const descp = document.createElement("p");
-  descp.textContent = obj.description;
+  // const descp = document.createElement("p");
+  // descp.textContent = obj.description;
 
   const dateDiv = document.createElement("div");
   dateDiv.textContent = format(replaceDashesOnDate(obj.dueDate), "PPP");
 
-  const priorityP = document.createElement("p");
-  priorityP.textContent = obj.priority;
+  // const priorityP = document.createElement("p");
+  // priorityP.textContent = obj.priority;
 
   const editButton = document.createElement("button");
   editButton.setAttribute("class", "edit-bttn-todo");
@@ -45,13 +46,56 @@ function createTodoDiv(obj) {
     }
   });
 
+  const detailButton = document.createElement("button");
+  detailButton.setAttribute("class", "detail-button-todo");
+  addEvent(detailButton, "click", () => {
+    toggleModal(createDetailModal(obj));
+  });
+
+  const detailImg = document.createElement("img");
+  detailImg.src = DetailIcon;
+
   const editImg = document.createElement("img");
   editImg.src = EditIcon;
 
+  detailButton.append(detailImg);
   editButton.append(editImg);
 
-  div.append(heading, descp, dateDiv, priorityP, editButton);
+  div.append(heading, dateDiv, detailButton, editButton);
   return div;
+}
+
+function createDetailModal(obj) {
+  const dialog = document.createElement("dialog");
+  dialog.setAttribute("class", "modal-detail-wrapper");
+  dialog.classList.add("modal");
+
+  const modalContent = document.createElement("div");
+
+  const heading = document.createElement("h1");
+  heading.textContent = obj.title;
+
+  const descriptionP = document.createElement("p");
+  descriptionP.textContent = obj.description;
+
+  const dateP = document.createElement("p");
+  dateP.textContent = obj.dueDate;
+
+  const priorityPara = document.createElement("p");
+  priorityPara.textContent = obj.priority;
+
+  const cancelButton = document.createElement("button");
+  cancelButton.textContent = "Cancel";
+  addEvent(cancelButton, "click", () => {
+    toggleModal(dialog);
+  });
+
+  modalContent.append(heading, descriptionP, dateP, priorityPara, cancelButton);
+
+  dialog.append(modalContent);
+
+  document.body.append(dialog);
+  return dialog;
 }
 
 function queryTodo(title, arr) {
