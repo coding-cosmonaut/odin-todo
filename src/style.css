@@ -137,7 +137,9 @@ textarea {
 }
 
 /*TODO*/
-.edit-bttn-todo,.detail-button-todo {
+.edit-bttn-todo,
+.detail-button-todo,
+.remove-button-todo {
   width: 20px;
   height: auto;
 }

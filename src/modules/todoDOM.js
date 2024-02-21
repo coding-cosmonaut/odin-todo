@@ -1,8 +1,10 @@
 import { format, isToday, isThisWeek } from "date-fns";
 import EditIcon from "/src/assets/pencil.svg";
 import DetailIcon from "/src/assets/exclamation.svg";
+import RemoveIcon from "/src/assets/delete.svg";
 import { addEvent } from "./event";
 import {
+  collectionOfProjects,
   collectionOfTodos,
   thisWeekTodoCollection,
   todayTodoCollection,
@@ -52,17 +54,48 @@ function createTodoDiv(obj) {
     toggleModal(createDetailModal(obj));
   });
 
+  const removeButton = document.createElement("button");
+  removeButton.setAttribute("class", "remove-button-todo");
+  addEvent(removeButton, "click", function () {
+    const clickedTodo = this.parentNode.firstElementChild.textContent;
+    removeTodo(clickedTodo);
+  });
+
   const detailImg = document.createElement("img");
   detailImg.src = DetailIcon;
 
   const editImg = document.createElement("img");
   editImg.src = EditIcon;
 
+  const removeIcon = document.createElement("img");
+  removeIcon.src = RemoveIcon;
+
   detailButton.append(detailImg);
   editButton.append(editImg);
+  removeButton.append(removeIcon);
 
-  div.append(heading, dateDiv, detailButton, editButton);
+  div.append(heading, dateDiv, detailButton, editButton, removeButton);
   return div;
+}
+
+function removeTodo(todo) {
+  queryDOMTodo(todo).remove();
+  findTodoInArrays(collectionOfTodos, todo);
+  findTodoInArrays(todayTodoCollection, todo);
+  findTodoInArrays(thisWeekTodoCollection, todo);
+  collectionOfProjects.forEach((item) => {
+    item.todos.forEach((task, idx) => {
+      if (task.title === todo) {
+        item.todos.splice(idx, 1);
+      }
+    });
+  });
+}
+
+function findTodoInArrays(arr, todo) {
+  arr.forEach((item, idx) =>
+    item.title === todo ? arr.splice(idx, 1) : false
+  );
 }
 
 function createDetailModal(obj) {
@@ -252,17 +285,18 @@ function returnNewValues(todo, newObject, modal) {
   oldTodo.setAttribute("data-todo-title", newObject.title);
 
   let elementChildren = oldTodo.children;
+  console.log(elementChildren);
   elementChildren[0].textContent = newObject.title;
-  elementChildren[1].textContent = newObject.description;
-  elementChildren[2].textContent = format(
+  //elementChildren[1].textContent = newObject.description;
+  elementChildren[1].textContent = format(
     replaceDashesOnDate(newObject.dueDate),
     "PPP"
   );
-  if (todo.priority !== newObject.priority) {
-    elementChildren[3].textContent = newObject.priority;
-  } else {
-    elementChildren[3].textContent = todo.priority;
-  }
+  // if (todo.priority !== newObject.priority) {
+  //   elementChildren[3].textContent = newObject.priority;
+  // } else {
+  //   elementChildren[3].textContent = todo.priority;
+  // }
 
   let idx = collectionOfTodos.findIndex((item) => item.title === todo.title);
   collectionOfTodos[idx].title = newObject.title;
