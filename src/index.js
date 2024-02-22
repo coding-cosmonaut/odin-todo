@@ -16,7 +16,7 @@ import {
   appendThisWeekPage,
   checkForDeletedOptions,
 } from "./modules/createProject";
-import { collectionOfProjects } from "./global/allProjects";
+import { collectionOfProjects, collectionOfTodos } from "./global/allProjects";
 
 (function app() {
   const {
@@ -38,6 +38,30 @@ import { collectionOfProjects } from "./global/allProjects";
     todayPage,
     thisWeekPage,
   } = globalElements();
+
+  addEvent(window, "load", () => {
+    let todoData = JSON.parse(localStorage.getItem("collectionOfTodos"));
+    let projectData = JSON.parse(localStorage.getItem("collectionOfProjects"));
+
+    if (projectData) {
+      projectData.forEach((project) => {
+        collectionOfProjects.push(project);
+        let projectDiv = createProjectDiv(project);
+        addEvent(projectDiv, "click", () => {
+          switchToProject(contentDiv, project.title);
+        });
+
+        projectContainer.append(projectDiv);
+      });
+    }
+
+    if (todoData) {
+      todoData.forEach((task) => {
+        appendTodoToProject(task.project, task, task.dueDate);
+      });
+      switchToProject(contentDiv, "Home");
+    }
+  });
 
   appendImage();
   addEvent([taskBttn, cancelBttn, modal], "click", () => {
@@ -72,10 +96,14 @@ import { collectionOfProjects } from "./global/allProjects";
 
       appendTodoToProject(project, newTodo, dueDate);
 
-      appendTodayPage(contentDiv);
-      appendThisWeekPage(contentDiv);
+      // appendTodayPage(contentDiv);
+      // appendThisWeekPage(contentDiv);
 
       switchToProject(contentDiv, project);
+
+      let data = JSON.parse(localStorage.getItem("collectionOfTodos") || "[]");
+      data.push(newTodo);
+      localStorage.setItem("collectionOfTodos", JSON.stringify(data));
 
       form.reset();
       toggleModal(modal);
@@ -97,6 +125,12 @@ import { collectionOfProjects } from "./global/allProjects";
         let currentThis = this.getAttribute("data-title");
         switchToProject(contentDiv, currentThis);
       });
+
+      let data = JSON.parse(
+        localStorage.getItem("collectionOfProjects") || "[]"
+      );
+      data.push(newProject);
+      localStorage.setItem("collectionOfProjects", JSON.stringify(data));
 
       form.reset();
       projectForm.reset();
