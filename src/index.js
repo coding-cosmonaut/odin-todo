@@ -14,6 +14,7 @@ import {
   appendTodoToProject,
   appendTodayPage,
   appendThisWeekPage,
+  checkForDeletedOptions,
 } from "./modules/createProject";
 import { collectionOfProjects } from "./global/allProjects";
 
@@ -41,6 +42,7 @@ import { collectionOfProjects } from "./global/allProjects";
   appendImage();
   addEvent([taskBttn, cancelBttn, modal], "click", () => {
     toggleModal(modal);
+    checkForDeletedOptions(dropdownProjectInput);
   });
   addEvent(todayPage, "click", () => {
     appendTodayPage(contentDiv);
@@ -92,7 +94,7 @@ import { collectionOfProjects } from "./global/allProjects";
       appendProjectToDropdown(dropdownProjectInput, newProject);
       let newProjectDiv = createProjectDiv(newProject);
       addEvent(newProjectDiv, "click", function () {
-        let currentThis = this.firstChild.getAttribute("data-title");
+        let currentThis = this.getAttribute("data-title");
         switchToProject(contentDiv, currentThis);
       });
 

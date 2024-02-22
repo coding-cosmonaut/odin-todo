@@ -19,6 +19,19 @@ function checkDuplicateProjectTitle(input) {
   return collectionOfProjects.every((item) => item.title !== input.value);
 }
 
+function checkForDeletedOptions(selectInput) {
+  while (selectInput.lastElementChild.value !== "Home") {
+    selectInput.removeChild(selectInput.lastChild);
+  }
+
+  collectionOfProjects.forEach((item) => {
+    const options = document.createElement("option");
+    options.textContent = item.title;
+    options.value = item.title;
+    selectInput.append(options);
+  });
+}
+
 function appendProjectToDropdown(input, obj) {
   const option = document.createElement("option");
   option.setAttribute("value", obj.title);
@@ -98,4 +111,5 @@ export {
   appendTodoToProject,
   appendTodayPage,
   appendThisWeekPage,
+  checkForDeletedOptions,
 };

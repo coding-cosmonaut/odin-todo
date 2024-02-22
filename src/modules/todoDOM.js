@@ -80,9 +80,9 @@ function createTodoDiv(obj) {
 
 function removeTodo(todo) {
   queryDOMTodo(todo).remove();
-  findTodoInArrays(collectionOfTodos, todo);
-  findTodoInArrays(todayTodoCollection, todo);
-  findTodoInArrays(thisWeekTodoCollection, todo);
+  findTodoInArrays(collectionOfTodos, "title", todo);
+  findTodoInArrays(todayTodoCollection, "title", todo);
+  findTodoInArrays(thisWeekTodoCollection, "title", todo);
   collectionOfProjects.forEach((item) => {
     item.todos.forEach((task, idx) => {
       if (task.title === todo) {
@@ -92,9 +92,9 @@ function removeTodo(todo) {
   });
 }
 
-function findTodoInArrays(arr, todo) {
+function findTodoInArrays(arr, match, todo) {
   arr.forEach((item, idx) =>
-    item.title === todo ? arr.splice(idx, 1) : false
+    item[match] === todo ? arr.splice(idx, 1) : false
   );
 }
 
@@ -141,12 +141,28 @@ function queryDOMTodo(title) {
 
 function createProjectDiv(obj) {
   const div = document.createElement("div");
+  div.textContent = obj.title;
+  div.setAttribute("data-title", obj.title);
 
-  const ul = document.createElement("ul");
-  ul.textContent = obj.title;
-  ul.setAttribute("data-title", obj.title);
+  const deleteBttn = document.createElement("button");
 
-  div.append(ul);
+  const deleteIcon = document.createElement("img");
+  deleteIcon.src = RemoveIcon;
+  deleteIcon.setAttribute("class", "remove-button-todo");
+
+  addEvent(deleteBttn, "click", () => {
+    document.querySelector(`[data-title=${CSS.escape(obj.title)}]`).remove();
+    //document.querySelector(`option=[value=${obj.title}]`).remove();
+    console.log(document.querySelector(".project-dropdown"));
+    findTodoInArrays(collectionOfProjects, "title", obj.title);
+    findTodoInArrays(collectionOfTodos, "project", obj.title);
+    findTodoInArrays(todayTodoCollection, "project", obj.title);
+    findTodoInArrays(thisWeekTodoCollection, "project", obj.title);
+  });
+
+  deleteBttn.append(deleteIcon);
+
+  div.append(deleteBttn);
 
   return div;
 }

@@ -153,3 +153,9 @@ textarea {
   margin: 20px;
   width: 60%;
 }
+
+/*PROJECT BUTTON */ 
+.project-container > div {
+  display: flex;
+  justify-content: space-between;
+}
