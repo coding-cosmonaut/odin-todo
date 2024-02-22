@@ -315,7 +315,6 @@ function returnNewValues(todo, newObject, modal) {
   oldTodo.setAttribute("data-todo-title", newObject.title);
 
   let elementChildren = oldTodo.children;
-  console.log(elementChildren);
   elementChildren[0].textContent = newObject.title;
   //elementChildren[1].textContent = newObject.description;
   elementChildren[1].textContent = format(
@@ -332,7 +331,6 @@ function returnNewValues(todo, newObject, modal) {
   collectionOfTodos[idx].title = newObject.title;
   collectionOfTodos[idx].description = newObject.description;
   if (collectionOfTodos[idx].dueDate !== newObject.dueDate) {
-    console.log("DIFFERENT DAES");
     if (
       isToday(replaceDashesOnDate(newObject.dueDate)) &&
       !queryTodo(newObject.title, todayTodoCollection)
@@ -368,6 +366,8 @@ function returnNewValues(todo, newObject, modal) {
   }
   collectionOfTodos[idx].dueDate = newObject.dueDate;
   collectionOfTodos[idx].priority = newObject.priority;
+
+  localStorage.setItem("collectionOfTodos", JSON.stringify(collectionOfTodos));
 
   toggleModal(modal);
 }
