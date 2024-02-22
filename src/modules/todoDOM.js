@@ -90,6 +90,7 @@ function removeTodo(todo) {
       }
     });
   });
+  localStorage.setItem("collectionOfTodos", JSON.stringify(collectionOfTodos));
 }
 
 function findTodoInArrays(arr, match, todo) {
@@ -152,12 +153,25 @@ function createProjectDiv(obj) {
 
   addEvent(deleteBttn, "click", () => {
     document.querySelector(`[data-title=${CSS.escape(obj.title)}]`).remove();
-    //document.querySelector(`option=[value=${obj.title}]`).remove();
     console.log(document.querySelector(".project-dropdown"));
     findTodoInArrays(collectionOfProjects, "title", obj.title);
     findTodoInArrays(collectionOfTodos, "project", obj.title);
     findTodoInArrays(todayTodoCollection, "project", obj.title);
     findTodoInArrays(thisWeekTodoCollection, "project", obj.title);
+    localStorage.setItem(
+      "collectionOfTodos",
+      JSON.stringify(collectionOfTodos)
+    );
+    const [projectName] = collectionOfProjects;
+    if (projectName) {
+      console.log("in IF");
+      localStorage.setItem(
+        "collectionOfProjects",
+        JSON.stringify({ title: projectName.title })
+      );
+    } else {
+      localStorage.setItem("collectionOfProjects", JSON.stringify([]));
+    }
   });
 
   deleteBttn.append(deleteIcon);
