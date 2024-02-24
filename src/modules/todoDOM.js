@@ -152,6 +152,7 @@ function createProjectDiv(obj) {
   const div = document.createElement("div");
   div.textContent = obj.title;
   div.setAttribute("data-title", obj.title);
+  div.setAttribute("class", "project-children");
 
   const deleteBttn = document.createElement("button");
 
@@ -175,7 +176,7 @@ function createProjectDiv(obj) {
       console.log("in IF");
       localStorage.setItem(
         "collectionOfProjects",
-        JSON.stringify({ title: projectName.title })
+        JSON.stringify([{ title: projectName.title }])
       );
     } else {
       localStorage.setItem("collectionOfProjects", JSON.stringify([]));

@@ -44,7 +44,9 @@ import { collectionOfProjects, collectionOfTodos } from "./global/allProjects";
     let projectData = JSON.parse(localStorage.getItem("collectionOfProjects"));
 
     if (projectData) {
+      console.log(projectData);
       projectData.forEach((project) => {
+        console.log(project, "roject");
         collectionOfProjects.push(project);
         let projectDiv = createProjectDiv(project);
         addEvent(projectDiv, "click", () => {
