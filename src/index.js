@@ -96,9 +96,6 @@ import { collectionOfProjects, collectionOfTodos } from "./global/allProjects";
 
       appendTodoToProject(project, newTodo, dueDate);
 
-      // appendTodayPage(contentDiv);
-      // appendThisWeekPage(contentDiv);
-
       switchToProject(contentDiv, project);
 
       let data = JSON.parse(localStorage.getItem("collectionOfTodos") || "[]");

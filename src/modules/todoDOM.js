@@ -23,6 +23,13 @@ function createTodoDiv(obj) {
   const heading = document.createElement("p");
   heading.textContent = obj.title;
 
+  // const checkboxLabel = document.createElement("label");
+
+  // const checkboxInput = document.createElement("input");
+  // checkboxInput.setAttribute("type", "checkbox");
+
+  // checkboxLabel.append(checkboxInput);
+
   // const descp = document.createElement("p");
   // descp.textContent = obj.description;
 
@@ -79,6 +86,7 @@ function createTodoDiv(obj) {
 }
 
 function removeTodo(todo) {
+  console.log(todo);
   queryDOMTodo(todo).remove();
   findTodoInArrays(collectionOfTodos, "title", todo);
   findTodoInArrays(todayTodoCollection, "title", todo);

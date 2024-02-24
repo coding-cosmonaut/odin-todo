@@ -13,10 +13,12 @@
         </div>
 
         <div class="sidebar">
-          <div class="home">Home</div>
-          <div class="today-container">Today</div>
-          <div class="this-week-container">This Week</div>
-          <div class="project-container">Projects</div>
+          <div class="sidebar-top">
+            <div class="home">Home</div>
+            <div class="today-container">Today</div>
+            <div class="this-week-container">This Week</div>
+            <div class="project-container">Projects</div>
+          </div>
           <button id="task" class="creating-todo-bttn"></button>
         </div>
 
@@ -32,57 +34,86 @@
             <form class="form-project-wrap" action="">
               <div class="input-container">
                 <label>
-                  <input type="text" name="title" required />
+                  <input
+                    type="text"
+                    name="title"
+                    placeholder="Title"
+                    required
+                  />
                 </label>
               </div>
               <button class="add-project-bttn" type="submit">Submit</button>
             </form>
 
             <form class="form-todo-wrap" action="">
-              <div class="input-container">
-                <label>
-                  <input type="text" name="title" required />
-                </label>
-              </div>
-              <div class="input-container">
-                <label>
-                  <textarea
-                    name="description"
-                    required
-                    rows="5"
-                    cols="15"
-                  ></textarea>
-                </label>
-              </div>
-              <div class="input-container">
-                <label>
-                  <input required type="date" name="dueDate" />
-                </label>
-              </div>
-              <div class="input-container">
-                <label>
-                  <input type="radio" name="priority" value="low" />
-                  Low
-                </label>
+              <div class="input-todo-wrapper">
+                <div class="input-container">
+                  <label>
+                    <input
+                      type="text"
+                      name="title"
+                      placeholder="Title"
+                      required
+                    />
+                  </label>
+                </div>
+                <div class="input-container">
+                  <label>
+                    <textarea
+                      placeholder="describe it..."
+                      name="description"
+                      required
+                      rows="5"
+                      cols="15"
+                    ></textarea>
+                  </label>
+                </div>
+                <div class="input-container">
+                  <label>
+                    Due Date:
+                    <input required type="date" name="dueDate" />
+                  </label>
+                </div>
 
-                <label>
-                  <input type="radio" name="priority" value="medium" />
-                  Medium
-                </label>
+                <div class="input-container radio-container">
+                  <input
+                    id="first-value"
+                    type="radio"
+                    name="priority"
+                    value="low"
+                    checked
+                  />
+                  <label for="first-value" class="toggle toggle-yes">Low</label>
 
-                <label>
-                  <input type="radio" name="priority" value="high" />
-                  High
-                </label>
-              </div>
+                  <input
+                    id="second-value"
+                    type="radio"
+                    name="priority"
+                    value="medium"
+                  />
+                  <label for="second-value" class="toggle toggle-yes">
+                    Medium</label
+                  >
 
-              <div class="input-container">
-                <label>
-                  Projects
-                  <select name="project" id="project-dropdown">
-                    <option value="Home" selected>Home</option>
-                  </select>
-                </label>
+                  <input
+                    id="third-value"
+                    type="radio"
+                    name="priority"
+                    value="high"
+                  />
+                  <label for="third-value" class="toggle toggle-yes">
+                    High</label
+                  >
+                </div>
+
+                <div class="input-container">
+                  <label>
+                    Projects:
+                    <select name="project" id="project-dropdown">
+                      <option value="Home" selected>Home</option>
+                    </select>
+                  </label>
+                </div>
               </div>
 
               <div class="buttons-container">
