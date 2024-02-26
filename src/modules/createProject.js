@@ -42,43 +42,54 @@ function appendProjectToDropdown(input, obj) {
 function switchToProject(div, project) {
   div.innerHTML = "";
   if (project === "Home") {
+    div.innerHTML = "<h2>Home Page</h2>";
     collectionOfTodos.forEach((item) => {
       let todo = createTodoDiv(item);
       div.append(todo);
     });
   } else {
-    collectionOfProjects.forEach((item) => {
-      if (item.title === project) {
-        item.todos.forEach((todo) => {
-          let newTodo = createTodoDiv(todo);
-          div.append(newTodo);
-        });
+    div.innerHTML = `<h2>${project}</h2>`;
+    collectionOfTodos.forEach((item) => {
+      if (item.project === project) {
+        let newTodo = createTodoDiv(item);
+        div.append(newTodo);
       }
     });
   }
+
+  // else {
+  //   collectionOfProjects.forEach((item) => {
+  //     if (item.title === project) {
+  //       item.todos.forEach((todo) => {
+  //         let newTodo = createTodoDiv(todo);
+  //         div.append(newTodo);
+  //       });
+  //     }
+  //   });
+  // }
 }
 
 function appendTodayPage(div) {
   if (todayTodoCollection.length !== 0) {
-    div.innerHTML = "";
+    div.innerHTML = "<h2>Today Page</h2>";
     todayTodoCollection.forEach((todo) => {
       let todayTodo = createTodoDiv(todo);
       div.append(todayTodo);
     });
   } else {
-    div.innerHTML = "Nothing do, today!";
+    div.innerHTML = "<h2>Today Page</h2> <p>Nothing do, today!</p>";
   }
 }
 
 function appendThisWeekPage(div) {
   if (thisWeekTodoCollection.length !== 0) {
-    div.innerHTML = "";
+    div.innerHTML = "<h2>This Week Page</h2>";
     thisWeekTodoCollection.forEach((todo) => {
       let todayTodo = createTodoDiv(todo);
       div.append(todayTodo);
     });
   } else {
-    div.innerHTML = "Nothing do, this week!";
+    div.innerHTML = "<h2>This Week Page</h2> <p>Nothing do, this week!</p>";
   }
 }
 
@@ -92,6 +103,10 @@ function appendTodoToProject(project, todo, dateSelected) {
     const selectedProject = collectionOfProjects.find(
       (item) => item.title === project
     );
+    //console.log(selectedProject, "seleceted");
+    //ADDED TO FIX ISSUE
+    if (!selectedProject.todos) return;
+    //ISSUES
     selectedProject.todos.push(todo);
   }
   if (isToday(replaced)) {

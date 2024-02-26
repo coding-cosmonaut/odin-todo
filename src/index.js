@@ -44,15 +44,12 @@ import { collectionOfProjects, collectionOfTodos } from "./global/allProjects";
     let projectData = JSON.parse(localStorage.getItem("collectionOfProjects"));
 
     if (projectData) {
-      console.log(projectData);
       projectData.forEach((project) => {
-        console.log(project, "roject");
         collectionOfProjects.push(project);
         let projectDiv = createProjectDiv(project);
         addEvent(projectDiv, "click", () => {
           switchToProject(contentDiv, project.title);
         });
-
         projectContainer.append(projectDiv);
       });
     }
@@ -128,6 +125,7 @@ import { collectionOfProjects, collectionOfTodos } from "./global/allProjects";
       let data = JSON.parse(
         localStorage.getItem("collectionOfProjects") || "[]"
       );
+      //const { title } = newProject;
       data.push(newProject);
       localStorage.setItem("collectionOfProjects", JSON.stringify(data));
 

@@ -18,6 +18,7 @@ function replaceDashesOnDate(date) {
 function createTodoDiv(obj) {
   const div = document.createElement("div");
   div.setAttribute("class", "single-todo");
+  //console.log(obj);
   div.setAttribute("data-todo-title", obj.title);
 
   const heading = document.createElement("p");
@@ -86,13 +87,14 @@ function createTodoDiv(obj) {
 }
 
 function removeTodo(todo) {
-  console.log(todo);
   queryDOMTodo(todo).remove();
   findTodoInArrays(collectionOfTodos, "title", todo);
   findTodoInArrays(todayTodoCollection, "title", todo);
   findTodoInArrays(thisWeekTodoCollection, "title", todo);
+
   collectionOfProjects.forEach((item) => {
     item.todos.forEach((task, idx) => {
+      console.log("in second foreach", task, idx);
       if (task.title === todo) {
         item.todos.splice(idx, 1);
       }
@@ -162,7 +164,7 @@ function createProjectDiv(obj) {
 
   addEvent(deleteBttn, "click", () => {
     document.querySelector(`[data-title=${CSS.escape(obj.title)}]`).remove();
-    console.log(document.querySelector(".project-dropdown"));
+    //console.log(document.querySelector(".project-dropdown"));
     findTodoInArrays(collectionOfProjects, "title", obj.title);
     findTodoInArrays(collectionOfTodos, "project", obj.title);
     findTodoInArrays(todayTodoCollection, "project", obj.title);
@@ -171,16 +173,15 @@ function createProjectDiv(obj) {
       "collectionOfTodos",
       JSON.stringify(collectionOfTodos)
     );
-    const [projectName] = collectionOfProjects;
-    if (projectName) {
-      console.log("in IF");
-      localStorage.setItem(
-        "collectionOfProjects",
-        JSON.stringify([{ title: projectName.title }])
-      );
-    } else {
-      localStorage.setItem("collectionOfProjects", JSON.stringify([]));
-    }
+
+    const storageCollection = collectionOfProjects.map((item) => {
+      return { title: item.title, todos: (item.todos = []) };
+    });
+
+    localStorage.setItem(
+      "collectionOfProjects",
+      JSON.stringify(storageCollection)
+    );
   });
 
   deleteBttn.append(deleteIcon);
