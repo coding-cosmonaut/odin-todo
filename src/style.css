@@ -435,8 +435,8 @@ button[type="submit"]:active {
   display: flex;
   justify-content: space-between;
   border: 2px solid black;
-  margin: 20px;
-  width: 60%;
+  margin: var(--spacing-sm);
+  width: 80%;
 }
 
 /*PROJECT BUTTON */

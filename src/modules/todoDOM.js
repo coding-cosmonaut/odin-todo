@@ -20,6 +20,12 @@ function createTodoDiv(obj) {
   div.setAttribute("class", "single-todo");
   div.setAttribute("data-todo-title", obj.title);
 
+  //input done
+  const checkboxInput = document.createElement("input");
+  checkboxInput.setAttribute("type", "checkbox");
+  checkboxInput.setAttribute("class", "input-check");
+  //input done
+
   const heading = document.createElement("p");
   heading.textContent = obj.title;
 
@@ -30,7 +36,7 @@ function createTodoDiv(obj) {
   editButton.setAttribute("class", "edit-bttn-todo");
   addEvent(editButton, "click", function () {
     const foundTodo = queryTodo(
-      this.parentNode.firstElementChild.textContent,
+      this.parentNode.children[1].textContent,
       collectionOfTodos
     );
     let doesModalExist = document.querySelector(".modal-wrapper");
@@ -51,7 +57,7 @@ function createTodoDiv(obj) {
   const removeButton = document.createElement("button");
   removeButton.setAttribute("class", "remove-button-todo");
   addEvent(removeButton, "click", function () {
-    const clickedTodo = this.parentNode.firstElementChild.textContent;
+    const clickedTodo = this.parentNode.children[1].textContent;
     removeTodo(clickedTodo);
   });
 
@@ -68,7 +74,14 @@ function createTodoDiv(obj) {
   editButton.append(editImg);
   removeButton.append(removeIcon);
 
-  div.append(heading, dateDiv, detailButton, editButton, removeButton);
+  div.append(
+    checkboxInput,
+    heading,
+    dateDiv,
+    detailButton,
+    editButton,
+    removeButton
+  );
   return div;
 }
 
@@ -176,6 +189,7 @@ function createProjectDiv(obj) {
 }
 
 function createEditModal(currentTodo) {
+  console.log(currentTodo)
   const modalWrapper = document.createElement("dialog");
   modalWrapper.classList.add("modal-wrapper");
   modalWrapper.classList.add("modal");
@@ -307,9 +321,9 @@ function returnNewValues(todo, newObject, modal) {
   oldTodo.setAttribute("data-todo-title", newObject.title);
 
   let elementChildren = oldTodo.children;
-  elementChildren[0].textContent = newObject.title;
+  elementChildren[1].textContent = newObject.title;
   //elementChildren[1].textContent = newObject.description;
-  elementChildren[1].textContent = format(
+  elementChildren[2].textContent = format(
     replaceDashesOnDate(newObject.dueDate),
     "PPP"
   );
