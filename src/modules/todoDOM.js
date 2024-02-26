@@ -18,27 +18,13 @@ function replaceDashesOnDate(date) {
 function createTodoDiv(obj) {
   const div = document.createElement("div");
   div.setAttribute("class", "single-todo");
-  //console.log(obj);
   div.setAttribute("data-todo-title", obj.title);
 
   const heading = document.createElement("p");
   heading.textContent = obj.title;
 
-  // const checkboxLabel = document.createElement("label");
-
-  // const checkboxInput = document.createElement("input");
-  // checkboxInput.setAttribute("type", "checkbox");
-
-  // checkboxLabel.append(checkboxInput);
-
-  // const descp = document.createElement("p");
-  // descp.textContent = obj.description;
-
   const dateDiv = document.createElement("div");
   dateDiv.textContent = format(replaceDashesOnDate(obj.dueDate), "PPP");
-
-  // const priorityP = document.createElement("p");
-  // priorityP.textContent = obj.priority;
 
   const editButton = document.createElement("button");
   editButton.setAttribute("class", "edit-bttn-todo");
@@ -94,7 +80,6 @@ function removeTodo(todo) {
 
   collectionOfProjects.forEach((item) => {
     item.todos.forEach((task, idx) => {
-      console.log("in second foreach", task, idx);
       if (task.title === todo) {
         item.todos.splice(idx, 1);
       }
@@ -164,7 +149,6 @@ function createProjectDiv(obj) {
 
   addEvent(deleteBttn, "click", () => {
     document.querySelector(`[data-title=${CSS.escape(obj.title)}]`).remove();
-    //console.log(document.querySelector(".project-dropdown"));
     findTodoInArrays(collectionOfProjects, "title", obj.title);
     findTodoInArrays(collectionOfTodos, "project", obj.title);
     findTodoInArrays(todayTodoCollection, "project", obj.title);
@@ -192,8 +176,6 @@ function createProjectDiv(obj) {
 }
 
 function createEditModal(currentTodo) {
-  console.log(currentTodo, "ccurenttodo");
-  console.log("in CREATE", currentTodo.title, currentTodo.description);
   const modalWrapper = document.createElement("dialog");
   modalWrapper.classList.add("modal-wrapper");
   modalWrapper.classList.add("modal");
@@ -346,7 +328,6 @@ function returnNewValues(todo, newObject, modal) {
       !queryTodo(newObject.title, todayTodoCollection)
     ) {
       todayTodoCollection.push(newObject);
-      console.log(todayTodoCollection, "in SECOND IF");
     } else if (
       !isToday(replaceDashesOnDate(newObject.dueDate)) &&
       queryTodo(newObject.title, todayTodoCollection)
@@ -361,7 +342,6 @@ function returnNewValues(todo, newObject, modal) {
       !queryTodo(newObject.title, thisWeekTodoCollection)
     ) {
       thisWeekTodoCollection.push(newObject);
-      console.log(todayTodoCollection, "in SECOND IF - THIS WEEK");
     } else if (
       !isThisWeek(replaceDashesOnDate(newObject.dueDate)) &&
       queryTodo(newObject.title, thisWeekTodoCollection)

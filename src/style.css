@@ -114,6 +114,14 @@ main {
   background-color: white;
 }
 
+/*CONTENT*/
+.content-h2-heading {
+  margin: var(--spacing-md);
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 0.3rem;
+}
+
 /*PROJECT CONTAINER */
 
 /*PROJECT SIDEBAR*/

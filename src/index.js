@@ -125,7 +125,6 @@ import { collectionOfProjects, collectionOfTodos } from "./global/allProjects";
       let data = JSON.parse(
         localStorage.getItem("collectionOfProjects") || "[]"
       );
-      //const { title } = newProject;
       data.push(newProject);
       localStorage.setItem("collectionOfProjects", JSON.stringify(data));
 
