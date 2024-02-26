@@ -115,9 +115,14 @@ main {
 }
 
 /*CONTENT*/
+.page-message {
+  margin: var(--spacing-md);
+  font-size: 1.3rem;
+}
+
 .content-h2-heading {
   margin: var(--spacing-md);
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: bold;
   letter-spacing: 0.3rem;
 }
@@ -301,7 +306,7 @@ textarea {
 
 .radio-container:has(#first-value:checked)::before {
   left: 0%;
-  background: #dfff00;
+  background: #C1E1C1;
 }
 input[type="radio"]:checked + label {
   color: var(--second-black);
@@ -328,6 +333,88 @@ input[type="radio"] {
   cursor: pointer;
 }
 /*RADIO*/
+
+/*EDIT MODAL*/
+.modal-wrapper {
+  width: 600px;
+  height: 600px;
+}
+
+.edit-modal-content {
+  height: 100%;
+}
+
+.edit-radio-container {
+  position: relative;
+  height: 50px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.edit-radio-container::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 30%;
+  height: 100%;
+  background-color: var(--second-black);
+  border: 1px solid #fff;
+  border-radius: 12px;
+  transition: 0.5s left ease;
+}
+
+.edit-radio-container:has(#low-value:checked)::before {
+  left: 0%;
+  background: #C1E1C1;
+}
+input[type="radio"]:checked + label {
+  color: var(--second-black);
+}
+
+.edit-radio-container:has(#medium-value:checked)::before {
+  left: 34%;
+  background: #fac898;
+}
+
+.edit-radio-container:has(#high-value:checked)::before {
+  left: 69%;
+  background: #faa0a0;
+}
+/*EDIT MODAL*/
+
+/*DETAIL MODAL*/
+.modal-detail-wrapper {
+  width: 300px;
+  height: max-content;
+}
+
+.modal-detail-wrapper > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  padding: var(--spacing-md);
+}
+
+.modal-detail-wrapper > div > h1 {
+  align-self: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.modal-detail-wrapper > div > p {
+  padding: calc(var(--spacing-sm) / 2);
+  font-size: 1.3rem;
+}
+
+.modal-detail-wrapper > div > p:first {
+  font-weight: bold;
+}
+
+.modal-detail-wrapper > div > .buttons-container {
+  padding: 0;
+}
+
+/*DETAIL MODAL*/
 
 input[type="date"] {
   background-color: var(--second-black);
@@ -427,20 +514,127 @@ button[type="submit"]:active {
 .remove-button-todo {
   width: 20px;
   height: auto;
+  background: none;
+  border: none;
 }
-.todo-content {
+
+.edit-bttn-todo,
+.detail-button-todo,
+.remove-button-todo:hover {
+  cursor: pointer;
+}
+
+.checkbox-title-section,
+.button-date-section {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-sm);
+}
+
+.checkbox-title-section {
+  width: 40%;
+}
+
+.checkbox-title-section > input {
+  margin: calc(var(--spacing-sm) / 2);
+}
+
+input[type="checkbox"]::before {
+  transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+  border: 2px solid;
+  border-radius: 0;
+  background-color: white;
+  border-color: transparent;
+  box-sizing: border-box;
+  color: var(--second-black);
+  content: close-quote;
+  display: inline-block;
+  height: 12px;
+  outline: 2px solid var(--second-black);
+  transition-duration: 0.4s;
+  transition-property: background-color, border-color;
+  width: 12px;
+}
+input[type="checkbox"]:hover {
+  cursor: pointer;
+}
+
+input[type="checkbox"]:checked::before {
+  background-color: var(--second-black);
+  border-color: white;
+}
+
+.checkbox-title-section > p {
+  font-weight: bold;
+  font-size: 1.2rem;
+  letter-spacing: 0.15rem;
+}
+
+.strikethrough {
+  position: relative;
+}
+
+.strikethrough::after {
+  position: absolute;
+  top: calc(50% - 0.05em);
+  left: 0;
+  width: 140%;
+  content: "";
+  display: inline-block;
+  opacity: 0;
+  border-top: 0.15em solid var(--second-black);
+  transform: translateX(-300%);
+  transition: transform 0.25s ease-in-out;
+}
+
+.strikethrough-animation::after {
+  transform: translateX(0%);
+  opacity: 1;
+}
+
+.strikethrough-clicked {
+  opacity: 0.4;
+}
+
+.button-date-section > * {
+  margin: calc(var(--spacing-sm) / 2);
 }
 
 .single-todo {
   display: flex;
   justify-content: space-between;
-  border: 2px solid black;
+  position: relative;
   margin: var(--spacing-sm);
   width: 80%;
+  box-shadow: 0px 16px 48px 0px rgba(0, 0, 0, 0.176);
+  transition: all 0.7s ease;
+  border-radius: 5px;
+}
+
+.single-todo-lightGreen {
+  background: linear-gradient(45deg, #C1E1C1, #fff);
+}
+
+.single-todo-mediumOrange {
+  background: linear-gradient(45deg, #fac898, #fff);
+}
+
+.single-todo-redHigh {
+  background: linear-gradient(45deg, #faa0a0, #fff);
 }
 
 /*PROJECT BUTTON */
 .project-container > div {
   display: flex;
   justify-content: space-between;
+}
+
+/*ANIMATIONS*/
+@keyframes strikethrough {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
 }

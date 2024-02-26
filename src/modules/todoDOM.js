@@ -18,16 +18,32 @@ function replaceDashesOnDate(date) {
 function createTodoDiv(obj) {
   const div = document.createElement("div");
   div.setAttribute("class", "single-todo");
+  obj.priority === "low"
+    ? div.classList.add("single-todo-lightGreen")
+    : obj.priority === "medium"
+    ? div.classList.add("single-todo-mediumOrange")
+    : obj.priority === "high"
+    ? div.classList.add("single-todo-redHigh")
+    : div.classList.add("single-todo-lightGreen");
   div.setAttribute("data-todo-title", obj.title);
 
-  //input done
   const checkboxInput = document.createElement("input");
   checkboxInput.setAttribute("type", "checkbox");
   checkboxInput.setAttribute("class", "input-check");
-  //input done
 
   const heading = document.createElement("p");
+  heading.setAttribute("class", "strikethrough");
   heading.textContent = obj.title;
+
+  addEvent(checkboxInput, "click", (e) => {
+    heading.classList.toggle("strikethrough-animation");
+    e.target.parentNode.parentNode.classList.toggle("strikethrough-clicked");
+  });
+
+  const todoSection = document.createElement("div");
+  todoSection.setAttribute("class", "checkbox-title-section");
+
+  todoSection.append(checkboxInput, heading);
 
   const dateDiv = document.createElement("div");
   dateDiv.textContent = format(replaceDashesOnDate(obj.dueDate), "PPP");
@@ -36,7 +52,7 @@ function createTodoDiv(obj) {
   editButton.setAttribute("class", "edit-bttn-todo");
   addEvent(editButton, "click", function () {
     const foundTodo = queryTodo(
-      this.parentNode.children[1].textContent,
+      this.parentNode.parentNode.firstElementChild.lastElementChild.textContent,
       collectionOfTodos
     );
     let doesModalExist = document.querySelector(".modal-wrapper");
@@ -51,13 +67,20 @@ function createTodoDiv(obj) {
   const detailButton = document.createElement("button");
   detailButton.setAttribute("class", "detail-button-todo");
   addEvent(detailButton, "click", () => {
-    toggleModal(createDetailModal(obj));
+    let doesModalExist = document.querySelector(".modal-detail-wrapper");
+    if (doesModalExist) {
+      doesModalExist.remove();
+      toggleModal(createDetailModal(obj));
+    } else {
+      toggleModal(createDetailModal(obj));
+    }
   });
 
   const removeButton = document.createElement("button");
   removeButton.setAttribute("class", "remove-button-todo");
   addEvent(removeButton, "click", function () {
-    const clickedTodo = this.parentNode.children[1].textContent;
+    const clickedTodo =
+      this.parentNode.parentNode.firstElementChild.lastElementChild.textContent;
     removeTodo(clickedTodo);
   });
 
@@ -74,14 +97,12 @@ function createTodoDiv(obj) {
   editButton.append(editImg);
   removeButton.append(removeIcon);
 
-  div.append(
-    checkboxInput,
-    heading,
-    dateDiv,
-    detailButton,
-    editButton,
-    removeButton
-  );
+  const secondTodoSection = document.createElement("div");
+  secondTodoSection.setAttribute("class", "button-date-section");
+
+  secondTodoSection.append(dateDiv, detailButton, editButton, removeButton);
+
+  div.append(todoSection, secondTodoSection);
   return div;
 }
 
@@ -118,21 +139,28 @@ function createDetailModal(obj) {
   heading.textContent = obj.title;
 
   const descriptionP = document.createElement("p");
-  descriptionP.textContent = obj.description;
+  descriptionP.textContent = `Description: ${obj.description}`;
+  
 
   const dateP = document.createElement("p");
-  dateP.textContent = obj.dueDate;
+  dateP.textContent = `Date: ${obj.dueDate}`;
 
   const priorityPara = document.createElement("p");
-  priorityPara.textContent = obj.priority;
+  priorityPara.textContent = `Priority: ${obj.priority}`;
 
   const cancelButton = document.createElement("button");
+  cancelButton.setAttribute("id", "cancel");
   cancelButton.textContent = "Cancel";
   addEvent(cancelButton, "click", () => {
     toggleModal(dialog);
   });
 
-  modalContent.append(heading, descriptionP, dateP, priorityPara, cancelButton);
+  const buttonsCont = document.createElement("div");
+  buttonsCont.setAttribute("class", "buttons-container");
+
+  buttonsCont.append(cancelButton);
+
+  modalContent.append(heading, descriptionP, dateP, priorityPara, buttonsCont);
 
   dialog.append(modalContent);
 
@@ -189,13 +217,14 @@ function createProjectDiv(obj) {
 }
 
 function createEditModal(currentTodo) {
-  console.log(currentTodo)
+  console.log(currentTodo);
   const modalWrapper = document.createElement("dialog");
   modalWrapper.classList.add("modal-wrapper");
   modalWrapper.classList.add("modal");
 
   const modalContent = document.createElement("div");
-  modalContent.classList.add("modal-content");
+  modalContent.classList.add("edit-modal-content");
+  modalContent.classList.add("input-todo-wrapper");
 
   const childDiv1 = document.createElement("div");
   childDiv1.classList.add("input-container");
@@ -238,42 +267,54 @@ function createEditModal(currentTodo) {
   // Create fourth child div
   const childDiv4 = document.createElement("div");
   childDiv4.classList.add("input-container");
+  childDiv4.classList.add("edit-radio-container");
 
   const label4 = document.createElement("label");
   label4.textContent = "Low";
+  label4.setAttribute("for", "low-value");
+  label4.setAttribute("class", "toggle");
 
   const input4 = document.createElement("input");
   input4.setAttribute("type", "radio");
   input4.setAttribute("name", "priority");
   input4.setAttribute("value", "low");
+  input4.setAttribute("id", "low-value");
+  input4.setAttribute("checked", "");
+  input4.setAttribute("class", "single-todo-lightGreen");
 
-  label4.append(input4);
-  childDiv4.appendChild(label4);
+  //childDiv4.appendChild(input4, label4);
 
   const label5 = document.createElement("label");
   label5.textContent = "Medium";
+  label5.setAttribute("for", "medium-value");
+  label5.setAttribute("class", "toggle");
 
   const input5 = document.createElement("input");
   input5.setAttribute("type", "radio");
   input5.setAttribute("name", "priority");
   input5.setAttribute("value", "medium");
+  input5.setAttribute("id", "medium-value");
 
-  label5.append(input5);
-  childDiv4.appendChild(label5);
+  //label5.append(input5);
+  //childDiv4.appendChild(input5, label5);
 
   const label6 = document.createElement("label");
   label6.textContent = "High";
+  label6.setAttribute("for", "high-value");
+  label6.setAttribute("class", "toggle");
 
   const input6 = document.createElement("input");
   input6.setAttribute("type", "radio");
   input6.setAttribute("name", "priority");
   input6.setAttribute("value", "high");
+  input6.setAttribute("id", "high-value");
 
-  label6.append(input6);
-  childDiv4.appendChild(label6);
+  //label6.append(input6);
+  childDiv4.append(input4, label4, input5, label5, input6, label6);
 
   //BUTTON
   const button = document.createElement("button");
+  button.setAttribute("type", "submit");
   button.textContent = "Save Changes";
   addEvent(button, "click", () => {
     returnNewValues(
@@ -297,17 +338,22 @@ function createEditModal(currentTodo) {
   });
 
   const cancelButton = document.createElement("button");
+  cancelButton.setAttribute("id", "cancel");
   cancelButton.textContent = "Cancel";
   addEvent(cancelButton, "click", () => {
     toggleModal(modalWrapper);
   });
 
+  const buttonCont = document.createElement("div");
+  buttonCont.setAttribute("class", "buttons-container");
+
+  buttonCont.append(cancelButton, button);
+
   modalContent.appendChild(childDiv1);
   modalContent.appendChild(childDiv2);
   modalContent.appendChild(childDiv3);
   modalContent.appendChild(childDiv4);
-  modalContent.appendChild(cancelButton);
-  modalContent.appendChild(button);
+  modalContent.appendChild(buttonCont);
 
   modalWrapper.appendChild(modalContent);
 
@@ -321,17 +367,27 @@ function returnNewValues(todo, newObject, modal) {
   oldTodo.setAttribute("data-todo-title", newObject.title);
 
   let elementChildren = oldTodo.children;
-  elementChildren[1].textContent = newObject.title;
+  console.log(elementChildren, "ELEMENT");
+  console.log(oldTodo);
+  elementChildren[0].lastChild.textContent = newObject.title;
   //elementChildren[1].textContent = newObject.description;
-  elementChildren[2].textContent = format(
+  elementChildren[1].firstChild.textContent = format(
     replaceDashesOnDate(newObject.dueDate),
     "PPP"
   );
-  // if (todo.priority !== newObject.priority) {
-  //   elementChildren[3].textContent = newObject.priority;
-  // } else {
-  //   elementChildren[3].textContent = todo.priority;
-  // }
+  if (newObject.priority === "low") {
+    oldTodo.classList.add("single-todo-lightGreen");
+    oldTodo.classList.remove("single-todo-mediumOrange");
+    oldTodo.classList.remove("single-todo-redHigh");
+  } else if (newObject.priority === "medium") {
+    oldTodo.classList.add("single-todo-mediumOrange");
+    oldTodo.classList.remove("single-todo-lightGreen");
+    oldTodo.classList.remove("single-todo-redHigh");
+  } else {
+    oldTodo.classList.add("single-todo-redHigh");
+    oldTodo.classList.remove("single-todo-mediumOrange");
+    oldTodo.classList.remove("single-todo-lightGreen");
+  }
 
   let idx = collectionOfTodos.findIndex((item) => item.title === todo.title);
   collectionOfTodos[idx].title = newObject.title;

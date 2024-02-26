@@ -67,7 +67,7 @@ function appendTodayPage(div) {
     });
   } else {
     div.innerHTML =
-      "<h2 class='content-h2-heading'>Today Page</h2> <p>Nothing do, today!</p>";
+      "<h2 class='content-h2-heading'>Today Page</h2> <p class='page-message'>Nothing to do, today!</p>";
   }
 }
 
@@ -80,7 +80,7 @@ function appendThisWeekPage(div) {
     });
   } else {
     div.innerHTML =
-      "<h2 class='content-h2-heading'>This Week Page</h2> <p>Nothing do, this week!</p>";
+      "<h2 class='content-h2-heading'>This Week Page</h2> <p class='page-message'>Nothing to do, this week!</p>";
   }
 }
 
