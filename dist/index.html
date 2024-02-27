@@ -1,1 +1,127 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>To-do List</title><script defer="defer" src="bundle.js"></script></head><body></body></html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-do List</title>
+  <script defer src="bundle.js"></script></head>
+  <body>
+    <main>
+      <div class="todo-list-container">
+        <div class="header">
+          <h1>To-do List</h1>
+        </div>
+
+        <div class="sidebar">
+          <div class="sidebar-top">
+            <div class="home">Home</div>
+            <div class="today-container">Today</div>
+            <div class="this-week-container">This Week</div>
+            <div class="project-container">Projects</div>
+          </div>
+          <button id="task" class="creating-todo-bttn"></button>
+        </div>
+
+        <div class="todo-content"></div>
+        <!--Modal Form-->
+        <dialog class="modal">
+          <div id="wrapper">
+            <div class="form-sidebar">
+              <button type="button" id="todo-form">To-do</button>
+              <button type="button" id="project-form">Project</button>
+            </div>
+
+            <form class="form-project-wrap" action="">
+              <div class="input-container">
+                <label>
+                  <input
+                    type="text"
+                    name="title"
+                    placeholder="Title"
+                    required
+                  />
+                </label>
+              </div>
+              <button class="add-project-bttn" type="submit">Submit</button>
+            </form>
+
+            <form class="form-todo-wrap" action="">
+              <div class="input-todo-wrapper">
+                <div class="input-container">
+                  <label>
+                    <input
+                      type="text"
+                      name="title"
+                      placeholder="Title"
+                      required
+                    />
+                  </label>
+                </div>
+                <div class="input-container">
+                  <label>
+                    <textarea
+                      placeholder="describe it..."
+                      name="description"
+                      required
+                      rows="5"
+                      cols="15"
+                    ></textarea>
+                  </label>
+                </div>
+                <div class="input-container">
+                  <label>
+                    Due Date:
+                    <input required type="date" name="dueDate" />
+                  </label>
+                </div>
+
+                <div class="input-container radio-container">
+                  <input
+                    id="first-value"
+                    type="radio"
+                    name="priority"
+                    value="low"
+                    checked
+                  />
+                  <label for="first-value" class="toggle">Low</label>
+
+                  <input
+                    id="second-value"
+                    type="radio"
+                    name="priority"
+                    value="medium"
+                  />
+                  <label for="second-value" class="toggle"> Medium</label>
+
+                  <input
+                    id="third-value"
+                    type="radio"
+                    name="priority"
+                    value="high"
+                  />
+                  <label for="third-value" class="toggle"> High</label>
+                </div>
+
+                <div class="input-container">
+                  <label>
+                    Projects:
+                    <select name="project" id="project-dropdown">
+                      <option value="Home" selected>Home</option>
+                    </select>
+                  </label>
+                </div>
+              </div>
+
+              <div class="buttons-container">
+                <button id="cancel" type="reset">Cancel</button>
+                <button type="submit">Submit</button>
+              </div>
+            </form>
+          </div>
+        </dialog>
+        <!--Modal Form-->
+        <div class="footer"></div>
+      </div>
+    </main>
+  </body>
+</html>
