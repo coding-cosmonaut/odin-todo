@@ -6,8 +6,7 @@ Live demonstration: https://coding-cosmonaut.github.io/odin-todo/
 
 # Project Summary
 
-First project in the JS course that utilizes webpack. It is my first attempt at separating code into
-different modules. 
+First project in the JS course that utilizes Webpack.
 
 Functionality includes: 
 - Create projects/to-dos
