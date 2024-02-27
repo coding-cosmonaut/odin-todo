@@ -1,4 +1,4 @@
-# odin-todo# O
+# odin-todo
 
 To-do Project - The Odin Project
 
