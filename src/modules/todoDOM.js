@@ -10,6 +10,7 @@ import {
   todayTodoCollection,
 } from "../global/allProjects";
 import { toggleModal } from "./modal";
+import { switchToProject } from "./createProject";
 
 function replaceDashesOnDate(date) {
   return date.replace(/-/g, "/");
@@ -140,7 +141,6 @@ function createDetailModal(obj) {
 
   const descriptionP = document.createElement("p");
   descriptionP.textContent = `Description: ${obj.description}`;
-  
 
   const dateP = document.createElement("p");
   dateP.textContent = `Date: ${obj.dueDate}`;
