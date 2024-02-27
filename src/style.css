@@ -37,9 +37,8 @@ main {
   grid-column: 1/-1;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   box-shadow: var(--shadow-bottom);
-  /* -webkit-box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.69);
-  -moz-box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.69); */
 }
 
 .header h1 {
@@ -65,12 +64,51 @@ main {
   box-shadow: var(--shadow-top);
 }
 
+/*HAMBURGER */
+.container-hamburger {
+  padding: 0 var(--spacing-sm) 0 var(--spacing-sm);
+  display: none;
+  position: relative;
+  z-index: 10;
+}
+.container-hamburger:hover {
+  cursor: pointer;
+}
+
+.bar1,
+.bar2,
+.bar3 {
+  width: 35px;
+  height: 5px;
+  background-color: var(--second-black);
+  margin: 6px 0;
+  transition: 0.4s;
+}
+
+.change .bar1 {
+  transform: translate(0, 11px) rotate(-45deg);
+  background-color: var(--second-black);
+}
+
+.change .bar2 {
+  opacity: 0;
+}
+
+.change .bar3 {
+  transform: translate(0, -11px) rotate(45deg);
+  background-color: var(--second-black);
+}
+
 /*SIDEBAR*/
 .sidebar {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   min-width: 300px;
+}
+
+div .sidebar-show {
+  transform: translateX(0);
 }
 
 .sidebar-top {
@@ -506,9 +544,6 @@ button[type="submit"]:active {
   transform: rotate(360deg);
   cursor: pointer;
 }
-.plus-icon:active {
-  transform: scale(0.9);
-}
 
 /*TODO*/
 .edit-bttn-todo,
@@ -631,6 +666,23 @@ input[type="checkbox"]:checked::before {
   justify-content: space-between;
 }
 
+/*FOOTER*/
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.footer a {
+  text-decoration: none;
+  color: var(--second-black);
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
 /*ANIMATIONS*/
 @keyframes strikethrough {
   from {
@@ -638,5 +690,32 @@ input[type="checkbox"]:checked::before {
   }
   to {
     transform: scaleX(1);
+  }
+}
+
+/*MEDIA*/
+@media only screen and (max-width: 785px) {
+  .todo-content {
+    grid-column: 1/-1;
+    grid-row: 2/3;
+  }
+  .sidebar {
+    transform: translateX(-200%);
+    height: 100%;
+    z-index: 10;
+    position: absolute;
+    transition: transform 0.3s ease;
+  }
+  .container-hamburger {
+    display: inline-block;
+  }
+  .single-todo {
+    width: 95%;
+  }
+  .header h1 {
+    font-size: 3.5rem;
+  }
+  .header h1::before {
+    width: 50px;
   }
 }

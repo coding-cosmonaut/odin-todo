@@ -37,6 +37,8 @@ import { collectionOfProjects, collectionOfTodos } from "./global/allProjects";
     homePage,
     todayPage,
     thisWeekPage,
+    hamburgerButton,
+    sidebar,
   } = globalElements();
 
   addEvent(window, "load", () => {
@@ -63,6 +65,10 @@ import { collectionOfProjects, collectionOfTodos } from "./global/allProjects";
   });
 
   appendImage();
+  addEvent(hamburgerButton, "click", () => {
+    hamburgerButton.classList.toggle("change");
+    sidebar.classList.toggle("sidebar-show");
+  });
   addEvent([taskBttn, cancelBttn, modal], "click", () => {
     toggleModal(modal);
     checkForDeletedOptions(dropdownProjectInput);

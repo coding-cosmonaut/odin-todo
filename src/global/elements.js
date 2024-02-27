@@ -17,6 +17,8 @@ export function globalElements() {
   const homePage = document.querySelector(".home");
   const todayPage = document.querySelector(".today-container");
   const thisWeekPage = document.querySelector(".this-week-container");
+  const hamburgerButton = document.querySelector(".container-hamburger");
+  const sidebar = document.querySelector(".sidebar");
 
   return {
     taskBttn,
@@ -37,5 +39,7 @@ export function globalElements() {
     homePage,
     todayPage,
     thisWeekPage,
+    hamburgerButton,
+    sidebar
   };
 }
