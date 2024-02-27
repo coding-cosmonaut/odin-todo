@@ -52,6 +52,7 @@ main {
   width: 90px;
   transform: translateY(10px);
   margin-right: 20px;
+  margin-left: 20px;
 }
 
 .sidebar {
@@ -69,6 +70,7 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  min-width: 300px;
 }
 
 .sidebar-top {
@@ -306,7 +308,7 @@ textarea {
 
 .radio-container:has(#first-value:checked)::before {
   left: 0%;
-  background: #C1E1C1;
+  background: #c1e1c1;
 }
 input[type="radio"]:checked + label {
   color: var(--second-black);
@@ -365,7 +367,7 @@ input[type="radio"] {
 
 .edit-radio-container:has(#low-value:checked)::before {
   left: 0%;
-  background: #C1E1C1;
+  background: #c1e1c1;
 }
 input[type="radio"]:checked + label {
   color: var(--second-black);
@@ -612,7 +614,7 @@ input[type="checkbox"]:checked::before {
 }
 
 .single-todo-lightGreen {
-  background: linear-gradient(45deg, #C1E1C1, #fff);
+  background: linear-gradient(45deg, #c1e1c1, #fff);
 }
 
 .single-todo-mediumOrange {
